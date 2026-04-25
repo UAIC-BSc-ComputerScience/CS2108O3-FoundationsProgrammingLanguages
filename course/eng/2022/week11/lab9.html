@@ -1,0 +1,181 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+  <!-- link rel="stylesheet" href="https://profs.info.uaic.ro/~arusoaie.andrei/style.css" /-->
+
+  <link rel="stylesheet" href="https://unpkg.com/sakura.css/css/sakura.css" media="screen" />
+  <link rel="stylesheet" href="https://unpkg.com/sakura.css/css/sakura-dark.css"
+    media="screen and (prefers-color-scheme: dark)" />
+
+
+  <title>~arusoaie.andrei/ Andrei Arusoaie</title>
+  <link rel="author" href="../../../index.html" />
+  <link rel="me" href="../../../index.html" />
+  <meta name="subject" content="Personal Web site of Andrei Arusoaie" />
+  <meta name="url" content="https://profs.info.uaic.ro/~arusoaie.andrei/" />
+  <meta name="description" content="Personal Web site of Andrei Arusoaie" />
+  <meta name="author" content="Andrei Arusoaie - https://profs.info.uaic.ro/~arusoaie.andrei/" />
+  <meta property="og:title" content="Personal Web site of Andrei Arusoaie">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://profs.info.uaic.ro/~arusoaie.andrei/">
+  <meta property="og:description" content="Research and Teaching Material">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    table {
+      border-collapse: collapse;
+      border: 2px solid #ddd;
+      width: 100%;
+    }
+
+    th {
+      background-color:#d8d6d65b;
+      border: 2px solid #d8d6d65b;
+      text-align: center;
+    }
+
+    td {
+      text-align: center;
+      padding: 8px;
+      border: 1px solid #ddd;
+    }
+
+  </style>
+
+</head>
+
+<body>
+  <blockquote>
+    <p>[<a href="../../../index.html">Home</a>]
+      [<a href="../../../teaching.html">Teaching</a>]
+      [<a href="../../../research.html">Research</a>]
+      [<a href="../../../index.html#contact">Contact</a>]</p>
+  </blockquote>
+  <hr />
+
+  <h1 id="laborator-9">Laborator 9</h1>
+  <ul>
+  <li>Back to <a href="../plp.html">PLP - Fall 2022</a></li>
+  <li><strong>Compilation</strong></li>
+  </ul>
+  <hr />
+  <h3 id="exerciții-de-antrenament">Exerciții de antrenament:</h3>
+  <ul>
+  <li>Studiați cu atenție compilatorul pentru expresii discutat la curs.
+  Rulați din nou exemplele și demonstrațiile discutate.</li>
+  </ul>
+  <h3 id="exerciții-propuse">Exerciții propuse:</h3>
+  <p>În acest laborator vom lucra cu un limbaj <code>B</code> pentru
+  expresii booleene care va conține constantele <code>T</code> și
+  <code>F</code> (corespunzatoare valorilor <em>true</em> și respectiv
+  <em>false</em>) și operațiile: negație, conjuncție și disjuncție.
+  Sintaxa abstractă este definită mai jos:</p>
+  <pre><code>Require Import String.
+Require Import List.
+Import ListNotations.
+
+Inductive B :=
+| T : B
+| F : B
+| neg : B -&gt; B
+| and : B -&gt; B -&gt; B
+| or  : B -&gt; B -&gt; B.</code></pre>
+  <ol type="1">
+  <li>(1 punct) Definiți un interpretor pentru limbajul B, completând
+  codul de mai jos în spațiile goale (<code>...</code>):</li>
+  </ol>
+  <pre><code>Fixpoint interpret (b : B) : bool :=
+  match b with
+  | T =&gt; true
+  | F =&gt; ...
+  | neg b =&gt; ...
+  | and b1 b2 =&gt; ...
+  | or b1 b2 =&gt; ...
+  end.</code></pre>
+  <ol start="2" type="1">
+  <li>(1 punct) Se consideră definiția unui <em>stack machine</em> de
+  mai jos:</li>
+  </ol>
+  <pre><code>Inductive Instruction :=
+| push : nat -&gt; Instruction
+| inv : Instruction
+| add : Instruction
+| mul : Instruction.</code></pre>
+  <p>Deși această mașină de calcul bazat pe stivă lucrează cu numere
+  naturale, pe stivă vom utiliza <strong>doar</strong> valorile 0 și 1
+  (sau <code>O</code> și <code>S O</code>). Motivul pentru care ne
+  limităm la aceste valori este că vom vrea să definim un compilator
+  pentru expresiile limbajului <code>B</code> în care valorile
+  <code>T</code> și <code>F</code> să fie codificate cu <code>1</code>
+  și respectiv <code>0</code>. Mai mult, operațiile booleene conjuncție
+  și disjuncție vor fi codificate utilizând operații peste numere
+  naturale (<code>mul</code> și respectiv <code>add</code>), iar negația
+  va fi codificată utilizând operația <code>inv</code> (care transformă
+  <code>1</code> în <code>0</code> și invers). Așadar, definim
+  următoarea semantică pentru instrucțiunea <code>push</code>:</p>
+  <pre><code>Fixpoint run_instruction (i : Instruction) (stack : list nat) : list nat :=
+  match i with
+  | push n =&gt; match n with
+              | O =&gt; O :: stack
+              | S n&#39; =&gt; (S O) :: stack
+              end
+  | inv =&gt; ...
+  | add =&gt; ...
+  | mul =&gt; ...
+  end.</code></pre>
+  <blockquote>
+  <p><strong>Cerință</strong>: completați spațiile libere
+  (<code>...</code>) din definiția de mai sus.</p>
+  </blockquote>
+  <ol start="3" type="1">
+  <li>(1 punct) Completați funcția de mai jos care primește la intrare o
+  listă instrucțiuni și o stivă și returnează stiva obținută în urma
+  execuției instrucțiunilor:</li>
+  </ol>
+  <pre><code>Fixpoint run_instructions
+         (stpgm : list Instruction)
+         (stack : list nat) :=
+  ...</code></pre>
+  <p>Această funcție va apela funcția <code>run_instruction</code> de la
+  exercițiul precedent.</p>
+  <ol start="4" type="1">
+  <li>(1 punct) Completați funcția de compilare de mai jos:</li>
+  </ol>
+  <pre><code>Fixpoint compile (b : B) : list Instruction :=
+  match b with
+    ...
+  end.</code></pre>
+  <ol start="5" type="1">
+  <li>(3+1 puncte) Demonstrați următoarele proprietăți:</li>
+  </ol>
+  <pre><code>Lemma soundness_helper:
+  forall b instrs stack,
+    run_instructions ((compile b) ++ instrs) stack =
+    run_instructions instrs (to_nat (interpret b) :: stack).
+Proof.
+Admitted.</code></pre>
+  <pre><code>Theorem soundness :
+  forall b,
+    run_instructions (compile b) nil =  [to_nat (interpret b)].
+Proof.
+Admitted.</code></pre>
+  <p>Pentru a întelege mai bine cum puteți aborda acest exercițiu,
+  citiți cu atenție demonstrațiile făcute la curs.</p>
+  <hr />
+  <p>Coq Reference Manual:
+  https://coq.inria.fr/distrib/current/refman/</p>
+
+  <script>
+    function myFunction() {
+      var modifieddate = document.lastModified;
+      document.write("Last updated: " + modifieddate + " - ");
+      document.write("Copyright &copy; Andrei Arusoaie");
+    }
+    myFunction();
+  </script>
+
+</body>
+
+</html>

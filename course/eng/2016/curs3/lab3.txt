@@ -1,0 +1,134 @@
+Create a file 'imp.k' with the following content:
+-----------------------------------------------------------
+module IMP-SYNTAX
+
+  syntax AExp ::= Int | Id
+                | AExp "/" AExp [left]
+                > AExp "+" AExp [left]
+                | "(" AExp ")"  [bracket]
+
+  syntax BExp ::= Bool
+                | "!" BExp 
+                | AExp "<=" AExp 
+                | "(" BExp ")"   [bracket]
+        
+
+  syntax Block ::= "{" "}"
+                 | "{" Stmt "}"
+
+  syntax Stmt ::= Block
+                | Id "=" AExp ";"
+                | "if" "(" BExp ")" Stmt "else" Stmt
+                | "while" "(" BExp ")" Stmt
+                > Stmt Stmt [left]
+
+  syntax Pgm ::= "int" Ids ";" Stmt
+  syntax Ids ::= List{Id, ","}
+endmodule
+
+module IMP
+  imports IMP-SYNTAX
+
+  configuration <T>
+            <k> $PGM:Pgm </k>
+          <state> .Map </state>
+        </T>
+
+  syntax KResult ::= Int | Bool
+
+  // Pgm
+  rule <k> int (X, Xs => Xs) ; S </k>
+       <state> Rho:Map (.Map => X |-> 0) </state> requires notBool(X in keys(Rho))
+  rule int .Ids ; S => S
+       
+  // Seq
+  rule S1:Stmt S2:Stmt => S1 ~> S2
+  
+  
+endmodule
+-----------------------------------------------------------
+
+Exercises:
+
+1. Run the following program:
+
+   int n, sum ; n = 1 + 9 ;
+
+   Append the necessary rules to the semantics such that the assigment
+   from exercise 1 works.
+
+Hint: - use the [strict] attribute for assignment
+      - consult the lecture slides 
+      
+2. Append the necessary rules to the semantics such that the following
+   program can be executed:
+
+   int n, sum;
+   if (n <= 0) { sum = (-1); } else { }
+
+Hint: - use strict(1) for the if statement
+
+3. Append the necessary rules to the semantics such that the following
+   programs can be executed:
+
+
+Program sum.imp:
+------------------------
+  int n, sum;
+
+  n = 1000;
+  sum = 0;
+
+  while (!(n <= 0)) {
+    sum = sum + n;
+    n = n + (-1);
+  }
+------------------------
+
+Program collatz.imp:
+--------------------------------
+  int m, n, q, r, s; 
+  m = 10;
+  while (!(m<=2)) {
+    n = m;
+    m = m + -1;
+    while (!(n<=1)) {
+      s = s+1;
+      q = n/2;
+      r = q+q+1;
+      if (r<=n) {
+        n = n+n+n+1;         // n becomes 3*n+1 if odd
+      } else {n=q;}          //        or   n/2 if even
+    }
+  }
+--------------------------------
+
+Program primes.imp:
+-------------------------------------
+  int i, m, n, q, r, s, t, x, y, z;
+  m = 10;  n = 2;
+  while (n <= m) {
+    // checking primality of n and writing t to 1 or 0
+    i = 2;  q = n/i;  t = 1;
+    while (i<=q && 1<=t) {
+      x = i;
+      y = q;
+      // fast multiplication (base 2) algorithm
+      z = 0;
+      while (!(x <= 0)) {
+        q = x/2;
+        r = q+q+1;
+        if (r <= x) { z = z+y; } else {}
+        x = q;
+        y = y+y;
+      } // end fast multiplication
+      if (n <= z) { t = 0; } else { i = i+1;  q = n/i; }
+    } // end checking primality
+    if (1 <= t) { s = s+1; } else {}
+    n = n+1;
+  }
+--------------------------------------
+
+
+4. Extra-points for extending the semantics with other constructs which
+   are tested on programs.

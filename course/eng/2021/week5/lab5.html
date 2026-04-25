@@ -1,0 +1,47 @@
+<!DOCTYPE html><html><head><a id="Top"> </a><link rel="stylesheet" type="text/css" href="../../../../main.css"><link rel="stylesheet" type="text/css" href="../../../../bootstrap.min.css"><meta name="viewport" content="width=device-width, initial-scale=1.0"></head><body><h4><a href="../../../../index.html">home</a> &#8226 <a href="../../../../pages/Teaching.html">teaching</a> &#8226 <a href="../../../../pages/Research.html">research</a> &#8226 <a href="../../../../index.html#contact">contact</a></h4><hr><div id="wrap"><h1>Laborator 5</h1><ul>
+<li>Back to <a href="../plp.html">PLP - Fall 2021</a></li>
+<li>Tematici: Interpretor pentru IMP</li>
+</ul>
+<hr>
+<h3>Exerciții de antrenament:</h3><ul>
+<li>Definiți un <em>environment</em> <code>Env</code> de tip <code>string -&gt; nat</code> și o funcție <code>update</code> care actualizează valoarea unei variable de tip <code>string</code> cu o valoare de tipul <code>nat</code>. Testați funcția <code>update</code> pe câteva exemple.</li>
+</ul>
+<h3>Exerciții propuse:</h3><ol>
+<li><p>(0.25p) Definiți un interpretor pentru expresiile aritmetice și booleene definite mai jos:</p>
+<pre><code>Inductive Exp :=
+| num : nat -&gt; Exp
+| var : string -&gt; Exp
+| add : Exp -&gt; Exp -&gt; Exp
+| sub : Exp -&gt; Exp -&gt; Exp
+| div : Exp -&gt; Exp -&gt; Exp.
+Inductive Cond :=
+| base : bool -&gt; Cond
+| bnot : Cond -&gt; Cond
+| beq  : Exp -&gt; Exp -&gt; Cond 
+| less : Exp -&gt; Exp -&gt; Cond
+| band : Cond -&gt; Cond -&gt; Cond.</code></pre><p>Atenție la operațiile de scădere și împărțire: acestea pot produce erori. De aceea, un evaluator pentru expresii aritmetice va returna tipul <code>option nat</code> în loc de <code>nat</code>. Pentru detalii despre <code>option</code> puteți rula pe rând comenzile:</p>
+<pre><code>Check option.
+Check option nat.
+Print option.
+Check (Some 2).
+Check None.</code></pre></li>
+<li><p>(0.25p) Definiți un interpretor pentru instrucțiunile definite mai jos:</p>
+<pre><code>Inductive Stmt :=
+| skip : Stmt 
+| assign : string -&gt; Exp -&gt; Stmt
+| seq : Stmt -&gt; Stmt -&gt; Stmt
+| ite : Cond -&gt; Stmt -&gt; Stmt -&gt; Stmt (* if-then-else *)
+| it  : Cond -&gt; Stmt -&gt; Stmt (* if-then *)
+| dowhile : Stmt -&gt; Cond -&gt; Stmt.</code></pre></li>
+<li><p>(0.25p) Scrieți un program care calculează cel mai mare divizor comun a două numere utilizând algoritmul lui Euclid prin scăderi repetate. Testați programul utilizând interpretorul definit la Exercițiul 2.</p>
+</li>
+<li><p>(0.25p) Scrieți un program care calculează cel de-al <code>n</code>-lea termen al șirului Fibonacci. Testați programul utilizând interpretorul definit la Exercițiul 2.</p>
+</li>
+</ol>
+<hr>
+<p>Coq Reference Manual: <a href="https://coq.inria.fr/distrib/current/refman/">https://coq.inria.fr/distrib/current/refman/</a></p></div><hr><div id="footer"><script>function myFunction() {
+    var modifieddate=document.lastModified;
+    document.write("Last updated: " + modifieddate + " - ");
+    document.write("Copyright &copy; Andrei Arusoaie");
+}
+myFunction();</script></div></body></html>

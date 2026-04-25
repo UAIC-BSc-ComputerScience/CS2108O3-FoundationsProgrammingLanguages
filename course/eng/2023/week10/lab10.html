@@ -1,0 +1,130 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+  <!-- link rel="stylesheet" href="https://profs.info.uaic.ro/~arusoaie.andrei/style.css" /-->
+
+  <link rel="stylesheet" href="https://unpkg.com/sakura.css/css/sakura.css" media="screen" />
+  <link rel="stylesheet" href="https://unpkg.com/sakura.css/css/sakura-dark.css"
+    media="screen and (prefers-color-scheme: dark)" />
+
+
+  <title>~arusoaie.andrei/ Andrei Arusoaie</title>
+  <link rel="author" href="../../../index.html" />
+  <link rel="me" href="../../../index.html" />
+  <meta name="subject" content="Personal Web site of Andrei Arusoaie" />
+  <meta name="url" content="https://profs.info.uaic.ro/~arusoaie.andrei/" />
+  <meta name="description" content="Personal Web site of Andrei Arusoaie" />
+  <meta name="author" content="Andrei Arusoaie - https://profs.info.uaic.ro/~arusoaie.andrei/" />
+  <meta property="og:title" content="Personal Web site of Andrei Arusoaie">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://profs.info.uaic.ro/~arusoaie.andrei/">
+  <meta property="og:description" content="Research and Teaching Material">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    table {
+      border-collapse: collapse;
+      border: 2px solid #ddd;
+      width: 100%;
+    }
+
+    th {
+      background-color:#d8d6d65b;
+      border: 2px solid #d8d6d65b;
+      text-align: center;
+    }
+
+    td {
+      text-align: center;
+      padding: 8px;
+      border: 1px solid #ddd;
+    }
+
+  </style>
+
+</head>
+
+<body>
+  <blockquote>
+    <p>[<a href="../../../index.html">Home</a>]
+      [<a href="../../../teaching.html">Teaching</a>]
+      [<a href="../../../research.html">Research</a>]
+      [<a href="../../../index.html#contact">Contact</a>]</p>
+  </blockquote>
+  <hr />
+
+  <h1 id="laborator-type-systems">Laborator: Type Systems</h1>
+  <ul>
+  <li>Back to <a href="../plp.html">PLP - Fall 2023</a></li>
+  </ul>
+  <hr />
+  <h3 id="exerciții-de-antrenament">Exerciții de antrenament:</h3>
+  <ul>
+  <li><p>Citiți cu atenție sistemul de tipuri definit pentru expresii
+  discutat la curs. Rulați din nou exemplele și demonstrațiile
+  discutate.</p></li>
+  <li><p>Mai departe, pentru seria de exerciții propuse se consideră
+  cunoscută următoarea sintaxa BNF a unui limbaj de expresii:</p></li>
+  </ul>
+  <pre><code>E ::= &#39;O&#39; | &#39;S&#39; E | &#39;isZero&#39; E | &#39;T&#39; | &#39;F&#39; | &#39;ite&#39; E E E</code></pre>
+  <blockquote>
+  <p><strong>Cerință</strong>: Definiți aceasta sintaxă în Coq.</p>
+  </blockquote>
+  <h3 id="exerciții-propuse">Exerciții propuse:</h3>
+  <ol type="1">
+  <li><p>(1 punct) Definiți o semantică Small-Step pentru expresiile
+  <code>E</code> de mai sus.</p></li>
+  <li><p>(2 puncte) Scrieți (în ASCII) regulile de tipizare pentru
+  expresiile de mai sus.</p></li>
+  </ol>
+  <p>Exemplu:</p>
+  <pre><code>           .
+TZero ------------
+        O : Nat
+
+         e : Nat
+TSucc -------------
+        S e : Nat</code></pre>
+  <blockquote>
+  <p>Se acordă câte 0.5 puncte pentru fiecare regulă scrisă corect
+  pentru celelalte construcții din <code>E</code> rămase:
+  <code>isZero E</code>, <code>T</code>, <code>F</code>,
+  <code>ite E E E</code>.</p>
+  </blockquote>
+  <ol start="3" type="1">
+  <li>(2 puncte) Scrieți (în ASCII, ca mai sus) și implementați în Coq 2
+  exemple de derivări care utilizează regulile de tipizare pe care
+  le-ați definit la exercițiul 2. <strong>Cele 2 exemple trebuie să
+  acopere toate construcțiile limbajului de expresii
+  <code>E</code>.</strong> Testați implementarea fără a folosi
+  <code>eauto</code>.</li>
+  </ol>
+  <blockquote>
+  <p>Se acordă câte 1 punct pentru fiecare derivare corectă, doar în
+  condițiile în care <strong>toate</strong> regulile sunt utilizate cel
+  puțin o singură dată.</p>
+  </blockquote>
+  <ol start="4" type="1">
+  <li>(4 puncte) Demonstrați proprietățile: <em>progress</em> (2
+  puncte), <em>type preservation</em> (1 punct) și <em>type
+  soundness</em> (1 punct) pentru sistemul de tipuri asociat limbajului
+  de expresii.</li>
+  </ol>
+  <hr />
+  <p>Coq Reference Manual: <a
+  href="https://coq.inria.fr/distrib/current/refman/">https://coq.inria.fr/distrib/current/refman/</a></p>
+
+  <script>
+    function myFunction() {
+      var modifieddate = document.lastModified;
+      document.write("Last updated: " + modifieddate + " - ");
+      document.write("Copyright &copy; Andrei Arusoaie");
+    }
+    myFunction();
+  </script>
+
+</body>
+
+</html>

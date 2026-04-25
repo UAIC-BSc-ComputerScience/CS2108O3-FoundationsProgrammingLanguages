@@ -1,0 +1,12 @@
+int x, y, z;
+x <- (-3);
+z <- 0;
+while x do {
+  x <- x + 1;
+  z <- z + 1
+};
+y <- 3;
+while y do {
+  y <- y + (-1);
+  z <- z * 2 + z
+}

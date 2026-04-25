@@ -1,0 +1,22 @@
+Assignments:
+1. Create an interpreter using K for the language below.
+2. Create tests for every language construct
+
+Language name: ZOB
+
+Language constructs:
+- arithmetic expressions: Int, Id, String, _+_, _/_, _*_, _++, ++_
+- boolean expressions: Bool, !_, _<=_, _>=_,  _&&_, _||_
+- statements and blocks:
+  * variable declarations: var x,y,z;
+  * assignment: x <- 3 + y;
+  * decisional:   (x <= 49) ? { x <- x + 1; } : { y <- y * 2; } ;
+  * loop: repeat x <- x + (-1); until x <= 0 end
+  * empty block: { }
+  * non-empty block: { var x; x <- x + (-1); }
+
+Requirements:
+- input/output feature
+- local variables in blocks
+- side-effects
+- create test programs for every language construct

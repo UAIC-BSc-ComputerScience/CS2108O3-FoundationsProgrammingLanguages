@@ -1,0 +1,148 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+  <!-- link rel="stylesheet" href="https://profs.info.uaic.ro/~arusoaie.andrei/style.css" /-->
+
+  <link rel="stylesheet" href="https://unpkg.com/sakura.css/css/sakura.css" media="screen" />
+  <link rel="stylesheet" href="https://unpkg.com/sakura.css/css/sakura-dark.css"
+    media="screen and (prefers-color-scheme: dark)" />
+
+
+  <title>~arusoaie.andrei/ Andrei Arusoaie</title>
+  <link rel="author" href="../../../index.html" />
+  <link rel="me" href="../../../index.html" />
+  <meta name="subject" content="Personal Web site of Andrei Arusoaie" />
+  <meta name="url" content="https://profs.info.uaic.ro/~arusoaie.andrei/" />
+  <meta name="description" content="Personal Web site of Andrei Arusoaie" />
+  <meta name="author" content="Andrei Arusoaie - https://profs.info.uaic.ro/~arusoaie.andrei/" />
+  <meta property="og:title" content="Personal Web site of Andrei Arusoaie">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://profs.info.uaic.ro/~arusoaie.andrei/">
+  <meta property="og:description" content="Research and Teaching Material">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    table {
+      border-collapse: collapse;
+      border: 2px solid #ddd;
+      width: 100%;
+    }
+
+    th {
+      background-color:#d8d6d65b;
+      border: 2px solid #d8d6d65b;
+      text-align: center;
+    }
+
+    td {
+      text-align: center;
+      padding: 8px;
+      border: 1px solid #ddd;
+    }
+
+  </style>
+
+</head>
+
+<body>
+  <blockquote>
+    <p>[<a href="../../../index.html">Home</a>]
+      [<a href="../../../teaching.html">Teaching</a>]
+      [<a href="../../../research.html">Research</a>]
+      [<a href="../../../index.html#contact">Contact</a>]</p>
+  </blockquote>
+  <hr />
+
+  <h1 id="laborator-6-evaluarea-programelor-imperative-simple">Laborator
+  6: <strong>Evaluarea programelor imperative simple</strong></h1>
+  <ul>
+  <li>Back to <a href="../plp.html">PLP - Fall 2023</a></li>
+  </ul>
+  <hr />
+  <h3 id="exerciții-de-antrenament">Exerciții de antrenament:</h3>
+  <ul>
+  <li><p>Definiți un <em>environment</em> <code>Env</code> de tip
+  <code>string -&gt; nat</code> și o funcție <code>update</code> care
+  actualizează valoarea unei variable de tip <code>string</code> cu o
+  valoare de tipul <code>nat</code>. Testați funcția <code>update</code>
+  pe câteva exemple.</p></li>
+  <li><p>Consultați tipul <a
+  href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#option">option</a>
+  din documentația oficială. Citiți cu atenție definiția
+  tipului.</p></li>
+  </ul>
+  <h3 id="exerciții-propuse">Exerciții propuse:</h3>
+  <ol type="1">
+  <li>(1 punct) Definiți un interpretor pentru expresiile aritmetice
+  definite mai jos:</li>
+  </ol>
+  <pre><code>Inductive AExp :=
+| num : nat -&gt; AExp
+| var : string -&gt; AExp
+| add : AExp -&gt; AExp -&gt; AExp
+| sub : AExp -&gt; AExp -&gt; AExp
+| div : AExp -&gt; AExp -&gt; AExp.</code></pre>
+  <blockquote>
+  <p>Atenție la operațiile de scădere și împărțire: acestea pot produce
+  erori. De aceea, un evaluator pentru expresii aritmetice va returna
+  tipul <code>option nat</code> în loc de <code>nat</code>. Pentru
+  detalii despre <code>option</code> puteți rula pe rând comenzile:</p>
+  </blockquote>
+  <pre><code>Check option.
+Check option nat.
+Print option.
+Check (Some 2).
+Check None.</code></pre>
+  <ol start="2" type="1">
+  <li>(1 punct) Definiți un interpretor pentru limbajul de definit în
+  laboratorul anterior (a cărui sintaxa abstractă pentru expresii
+  booleene și instrucțiuni este amintită mai jos). După definirea
+  interpretorului, testați programele care (1) calculează cel mai mare
+  divizor comun a două numere (Euclid cu scăderi repetate) și (2) cel
+  care calculează cel de-al <code>n</code>-lea termen al șirului
+  Fibonacci.</li>
+  </ol>
+  <pre><code>Inductive Cond :=
+| base : bool -&gt; Cond
+| bnot : Cond -&gt; Cond
+| beq  : AExp -&gt; AExp -&gt; Cond
+| less : AExp -&gt; AExp -&gt; Cond
+| band : Cond -&gt; Cond -&gt; Cond.
+Inductive Stmt :=
+| skip : Stmt 
+| assign : string -&gt; Exp -&gt; Stmt
+| seq : Stmt -&gt; Stmt -&gt; Stmt
+| ite : Cond -&gt; Stmt -&gt; Stmt -&gt; Stmt (* if-then-else *)
+| while : Cond -&gt; Stmt -&gt; Stmt.</code></pre>
+  <blockquote>
+  <p>Atenție: operațiile pentru expresii aritmetice va returna tipul
+  <code>option nat</code> în loc de <code>nat</code>. Acest lucru are
+  impact asupra rezultatului interpretării expresiilor booleene.</p>
+  </blockquote>
+  <ol start="3" type="1">
+  <li>(3 puncte) Definiți un interpretor pentru logica propozițională.
+  Detalii sunt disponibile aici: [<a
+  href="https://logicincs.github.io/note_curs_lp.pdf">Logica
+  propozițională</a>]. Se acordă 1 punct pentru definirea corectă a
+  sintaxei, 1 punct pentru definirea asignărilor și a unor exemple de
+  asignări, și 1 punct pentru semantică și exemple care ilustrează
+  funcționarea corectă.</li>
+  </ol>
+  <hr />
+  <p>Coq Reference Manual: <a
+  href="https://coq.inria.fr/distrib/current/refman/">https://coq.inria.fr/distrib/current/refman/</a></p>
+
+  <script>
+    function myFunction() {
+      var modifieddate = document.lastModified;
+      document.write("Last updated: " + modifieddate + " - ");
+      document.write("Copyright &copy; Andrei Arusoaie");
+    }
+    myFunction();
+  </script>
+
+</body>
+
+</html>

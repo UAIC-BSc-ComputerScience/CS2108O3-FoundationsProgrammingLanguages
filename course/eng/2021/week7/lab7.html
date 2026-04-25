@@ -1,0 +1,39 @@
+<!DOCTYPE html><html><head><a id="Top"> </a><link rel="stylesheet" type="text/css" href="../../../../main.css"><link rel="stylesheet" type="text/css" href="../../../../bootstrap.min.css"><meta name="viewport" content="width=device-width, initial-scale=1.0"></head><body><h4><a href="../../../../index.html">home</a> &#8226 <a href="../../../../pages/Teaching.html">teaching</a> &#8226 <a href="../../../../pages/Research.html">research</a> &#8226 <a href="../../../../index.html#contact">contact</a></h4><hr><div id="wrap"><h1>Laborator 7</h1><ul>
+<li>Back to <a href="../plp.html">PLP - Fall 2021</a></li>
+<li>Tematica: Small-step SOS</li>
+</ul>
+<hr>
+<h3>Exerciții de antrenament:</h3><ul>
+<li>Citiți cu atenție semantica Small-step SOS a limbajului IMP discutată la curs. Rulați din nou exemplele și demonstrațiile discutate.</li>
+</ul>
+<h3>Exerciții propuse:</h3><ol>
+<li><p>(0.5p) Definiți o semantică Small-step pentru expresiile (aritmetice și booleene) definite mai jos și scrieți câte un exemplu simplu de derivare pentru fiecare tip de expresie:</p>
+<pre><code>Inductive Exp :=
+| num : nat -&gt; Exp
+| var : string -&gt; Exp
+| add : Exp -&gt; Exp -&gt; Exp
+| sub : Exp -&gt; Exp -&gt; Exp
+| div : Exp -&gt; Exp -&gt; Exp.
+Inductive Cond :=
+| base : bool -&gt; Cond
+| bnot : Cond -&gt; Cond
+| beq  : Exp -&gt; Exp -&gt; Cond 
+| less : Exp -&gt; Exp -&gt; Cond
+| band : Cond -&gt; Cond -&gt; Cond.</code></pre><p><code>Nat.sub</code> și <code>Nat.div</code> (din modulul <code>Nat</code> predefinite în Coq) pot fi utilizate pentru operațiile de scădere și înmulțire. </p>
+</li>
+<li><p>(0.5p) Definiți o semantică Small-step SOS pentru instrucțiunile definite mai jos și scrieți câte un exemplu simplu de derivare pentru fiecare instrucțiune:</p>
+<pre><code>Inductive Stmt :=
+| skip : Stmt 
+| assign : string -&gt; Exp -&gt; Stmt
+| seq : Stmt -&gt; Stmt -&gt; Stmt
+| ite : Cond -&gt; Stmt -&gt; Stmt -&gt; Stmt (* if-then-else *)
+| it  : Cond -&gt; Stmt -&gt; Stmt (* if-then *)
+| dowhile : Stmt -&gt; Cond -&gt; Stmt.</code></pre></li>
+</ol>
+<hr>
+<p>Coq Reference Manual: <a href="https://coq.inria.fr/distrib/current/refman/">https://coq.inria.fr/distrib/current/refman/</a></p></div><hr><div id="footer"><script>function myFunction() {
+    var modifieddate=document.lastModified;
+    document.write("Last updated: " + modifieddate + " - ");
+    document.write("Copyright &copy; Andrei Arusoaie");
+}
+myFunction();</script></div></body></html>

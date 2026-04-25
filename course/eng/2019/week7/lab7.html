@@ -1,0 +1,54 @@
+<!DOCTYPE html><html><head><a id="Top"> </a><link rel="stylesheet" type="text/css" href="../../../../main.css"><link rel="stylesheet" type="text/css" href="../../../../bootstrap.min.css"><meta name="viewport" content="width=device-width, initial-scale=1.0"></head><body><h4><a href="../../../../index.html">home</a> &#8226 <a href="../../../../pages/Teaching.html">teaching</a> &#8226 <a href="../../../../pages/Research.html">research</a> &#8226 <a href="../../../../index.html#contact">contact</a></h4><hr><div id="wrap"><h1>Laborator 7</h1><h3>Exerciții propuse:</h3><ol>
+<li><p>(1 pct.) Adăugați la sintaxa limbajului discutat la curs (<a href="../week6/imp.v">imp.v</a>) instrucțiunile <code>if then</code> și <code>if then else</code>. Adăugați semantica celor două instrucțiuni și testați semantica pe câte un exemplu. Pentru testare veți formula și demonstra lemele corespunzătoare în aceeași manieră în care s-a discutat la curs.</p>
+</li>
+<li><p>(1 pct.) Demonstrați că limbajul rezultat este determinist.</p>
+</li>
+</ol>
+<blockquote>
+<p>Sugestii pentru rezolvare:</p>
+<ul>
+<li>Citiți cu atenție formularea proprietății de mai jos și rulați pas cu pas demonstrația pentru a înțelege fiecare etapă:</li>
+</ul>
+</blockquote>
+<blockquote>
+<blockquote>
+<pre><code>Lemma aeval_is_deterministic:
+  forall aexp st n n&#39;,
+    aexp =[ st ]=&gt; n -&gt;
+    aexp =[ st ]=&gt; n&#39; -&gt;
+    n = n&#39;.
+Proof.
+  induction aexp; intros;
+    inversion H; inversion H0;
+      subst; auto.</code></pre></blockquote>
+</blockquote>
+<ul>
+<li>assert (IH1: i1 = i0).
+eapply IHaexp1; eauto.
+assert (IH2 : i2 = i3).
+eapply IHaexp2; eauto.
+subst.
+reflexivity.</li>
+<li>assert (IH1: i1 = i0).
+eapply IHaexp1; eauto.
+assert (IH2 : i2 = i3).
+eapply IHaexp2; eauto.
+subst.
+reflexivity.
+Qed.<pre><code></code></pre></li>
+</ul>
+<blockquote>
+<ul>
+<li>Formulați și demonstrați o lemă asemănătoare pentru expresiile booleene.</li>
+<li>Formulați și demonstrați o lemă asemănătoare pentru instrucțiuni.</li>
+</ul>
+</blockquote>
+<h3>Link-uri utile:</h3><ol>
+<li>Coq Reference Manual: <a href="https://coq.inria.fr/distrib/current/refman/">https://coq.inria.fr/distrib/current/refman/</a></li>
+<li>Software Foundations: <a href="https://softwarefoundations.cis.upenn.edu/">https://softwarefoundations.cis.upenn.edu/</a> </li>
+</ol></div><hr><div id="footer"><script>function myFunction() {
+    var modifieddate=document.lastModified;
+    document.write("Last updated: " + modifieddate + " - ");
+    document.write("Copyright &copy; Andrei Arusoaie");
+}
+myFunction();</script></div></body></html>

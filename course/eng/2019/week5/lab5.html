@@ -1,0 +1,77 @@
+<!DOCTYPE html><html><head><a id="Top"> </a><link rel="stylesheet" type="text/css" href="../../../../main.css"><link rel="stylesheet" type="text/css" href="../../../../bootstrap.min.css"><meta name="viewport" content="width=device-width, initial-scale=1.0"></head><body><h4><a href="../../../../index.html">home</a> &#8226 <a href="../../../../pages/Teaching.html">teaching</a> &#8226 <a href="../../../../pages/Research.html">research</a> &#8226 <a href="../../../../index.html#contact">contact</a></h4><hr><div id="wrap"><h1>Laborator 5</h1><h3>Exerciții de antrenament</h3><p>Se consideră un tip de date pentru expresiile aritmetice:</p>
+<pre><code>Inductive AExp :=
+| number : nat -&gt; AExp
+| plus : AExp -&gt; AExp -&gt; AExp
+| div : AExp -&gt; AExp -&gt; AExp.</code></pre><p>Fie funcția de evaluare a unei expresii <code>eval</code>, care returnează 0 în cazul în care expresia de evaluat este <code>div a b</code> (<code>a / b</code>), iar <code>b = 0</code>: </p>
+<pre><code>Fixpoint eval (e : AExp) : nat :=
+  match e with
+  | number n =&gt; n
+  | plus e1 e2 =&gt; (eval e1) + (eval e2)
+  | div e1 e2 =&gt; if Nat.eqb (eval e2) 0
+                   then 0
+                   else Nat.div (eval e1) (eval e2)
+  end.</code></pre><hr>
+<ol>
+<li>(Din laboratorul precedent) Demonstrați prin inducție că orice expresie <code>e</code>, <code>eval e &gt;= 0</code>.</li>
+</ol>
+<p>Vom demonstra mai întâi următoarea proprietate (conform cerinței, ea este prin inducție):</p>
+<pre><code>Lemma nats_are_positive : forall n, n &gt;= 0.
+Proof.
+  induction n; unfold ge in *.
+  - SearchPattern (_ &lt;= _).
+    apply Nat.le_refl. (* reflexivity for &lt;= *)
+  - SearchPattern (_ &lt;= _).
+    Check Nat.le_le_succ_r.
+    apply Nat.le_le_succ_r. (* prepare for IH application*)
+    apply IHn. (* use the inductive hyp *)
+Qed.</code></pre><p>Această proprietate este de fapt deja demonstrată și în Coq:</p>
+<pre><code>Check Nat.le_0_l.
+Nat.le_0_l
+     : forall n : nat, 0 &lt;= n</code></pre><p>Acum, demonstrația cerută de exercițiu este foarte ușoară:</p>
+<pre><code>Lemma eval_greater_than_0 :
+  forall e, eval e &gt;= 0.
+Proof.
+  intros.
+  SearchPattern (_ &lt;= _).
+  apply nats_are_positive. (* sau Nat.le_0_l *)
+Qed.</code></pre><hr>
+<ol start="2">
+<li>Definiția lui <code>eval</code> nu este tocmai corectă: matematic, <code>3 / 0</code> nu este egal cu <code>0</code>. În astfel de situații este bine să returnăm un rezultat cât mai precis. Deoarece pentru numere naturale rezultatul evaluării <code>3 / 0</code> nu produce un <code>nat</code>, vom crea un nou tip denumit <code>ErrorNat</code> care să includă o valoare de eroare pentru aceste situații:</li>
+</ol>
+<pre><code>Inductive ErrorNat :=
+| err : ErrorNat
+| num : nat -&gt; ErrorNat.</code></pre><p>Acum putem putem defini adunarea peste <code>ErrorNat</code>:</p>
+<pre><code>Fixpoint plus_ErrorNat (n1 n2 : ErrorNat) : ErrorNat :=
+  match n1, n2 with
+  | err, _ =&gt; err
+  | _, err =&gt; err
+  | num v1, num v2 =&gt; num (v1 + v2)
+  end.</code></pre><hr>
+<hr>
+<h3>Exerciții propuse:</h3><ol>
+<li>(0.5 pct.) Scrieti o funcție care implementează împărțirea peste <code>ErrorNat</code>:</li>
+</ol>
+<pre><code>Fixpoint div_ErrorNat (n1 n2 : ErrorNat) : ErrorNat :=
+  match n1, n2 with
+    ...
+  end.</code></pre><p>Apoi, utilizând <code>plus_ErrorNat</code> și <code>div_ErrorNat</code> completați funcția <code>eval</code> de mai jos:</p>
+<pre><code>Fixpoint eval (e : AExp) : ErrorNat :=
+  match e with
+  | number n =&gt; ...
+  | plus e1 e2 =&gt; ...
+  | div e1 e2 =&gt; ...
+  end.
+</code></pre><ol start="2">
+<li><p>(0.5 pct.) Adăugați la sintaxa limbajului <code>IMP</code> discutat la curs (vezi fișierul: <a href="../week4/imp.v">imp.v</a>) instrucținea <code>if</code>. Scrieți măcar trei programe în limbajul <code>IMP</code> care să utilizeze această instrucțiune. Spre exemplu, puteți scrie programe care calculează maximul/minimul a trei numere, sau programe care compară două numere și returnează valori cu o anumită semnificație (e.g., <code>0</code> - dacă numerele sunt egale, <code>2</code> - dacă primul număr este mai mic decât al doilea, etc.).</p>
+</li>
+<li><p>(1 pct.) Modificați funcția <code>eval</code> din definiția limbajului <code>IMP</code> discutat la curs (vezi fișierul: <a href="../week4/imp.v">imp.v</a>) astfel încât să puteți rula programele ce conțin instrucțiunea <code>if</code> scrise la exercițiul 2. Testați programele scrise.</p>
+</li>
+</ol>
+<p><strong>Bonus</strong>:
+4. (1 pct.)  Formulați și verificați proprietăți ale programelor utilizând mecanismele de demonstrare puse la dispoziție de Coq. Pentru detalii, cereți ajutorul profesorului de laborator.</p>
+<p>Coq Reference Manual: <a href="https://coq.inria.fr/distrib/current/refman/">https://coq.inria.fr/distrib/current/refman/</a></p></div><hr><div id="footer"><script>function myFunction() {
+    var modifieddate=document.lastModified;
+    document.write("Last updated: " + modifieddate + " - ");
+    document.write("Copyright &copy; Andrei Arusoaie");
+}
+myFunction();</script></div></body></html>

@@ -1,0 +1,206 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+  <!-- link rel="stylesheet" href="https://profs.info.uaic.ro/~arusoaie.andrei/style.css" /-->
+
+  <link rel="stylesheet" href="https://unpkg.com/sakura.css/css/sakura.css" media="screen" />
+  <link rel="stylesheet" href="https://unpkg.com/sakura.css/css/sakura-dark.css"
+    media="screen and (prefers-color-scheme: dark)" />
+
+
+  <title>~arusoaie.andrei/ Andrei Arusoaie</title>
+  <link rel="author" href="../../../index.html" />
+  <link rel="me" href="../../../index.html" />
+  <meta name="subject" content="Personal Web site of Andrei Arusoaie" />
+  <meta name="url" content="https://profs.info.uaic.ro/~arusoaie.andrei/" />
+  <meta name="description" content="Personal Web site of Andrei Arusoaie" />
+  <meta name="author" content="Andrei Arusoaie - https://profs.info.uaic.ro/~arusoaie.andrei/" />
+  <meta property="og:title" content="Personal Web site of Andrei Arusoaie">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://profs.info.uaic.ro/~arusoaie.andrei/">
+  <meta property="og:description" content="Research and Teaching Material">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    table {
+      border-collapse: collapse;
+      border: 2px solid #ddd;
+      width: 100%;
+    }
+
+    th {
+      background-color:#d8d6d65b;
+      border: 2px solid #d8d6d65b;
+      text-align: center;
+    }
+
+    td {
+      text-align: center;
+      padding: 8px;
+      border: 1px solid #ddd;
+    }
+
+  </style>
+
+</head>
+
+<body>
+  <blockquote>
+    <p>[<a href="../../../index.html">Home</a>]
+      [<a href="../../../teaching.html">Teaching</a>]
+      [<a href="../../../research.html">Research</a>]
+      [<a href="../../../index.html#contact">Contact</a>]</p>
+  </blockquote>
+  <hr />
+
+  <h1
+  id="laborator-tipuri-algebrice-funcții-recursive-inducție-demonstrații">Laborator:
+  tipuri algebrice, funcții recursive, inducție, demonstrații</h1>
+  <ul>
+  <li>Back to <a href="../plp.html">PLP - Fall 2023</a></li>
+  </ul>
+  <h3 id="codul-scris-la-curs-inductive.v">Codul scris la curs: <a
+  href="inductive.v">inductive.v</a></h3>
+  <h3 id="setup">Setup</h3>
+  <p>Se vor considera cunoscute următoarele definiții:</p>
+  <pre><code>Inductive Nat := O : Nat | S : Nat -&gt; Nat.
+
+Definition one := S O.
+Definition two := S one.
+Definition three := S two.
+Definition four := S three.
+Definition five := S four.</code></pre>
+  <hr />
+  <h3 id="exerciții-de-antrenament-testarea-unor-funcții">Exerciții de
+  antrenament (testarea unor funcții):</h3>
+  <ul>
+  <li>Se dă următoarea funcție de egalitate a două elemente de tip
+  <code>Nat</code>:</li>
+  </ul>
+  <pre><code>Fixpoint eq_Nat (n m : Nat) :=
+  match n, m with
+  | O, O       =&gt; true
+  | O, S _     =&gt; false
+  | S _, O     =&gt; false 
+  | S n&#39;, S m&#39; =&gt; eq_Nat n&#39; m&#39;
+  end.</code></pre>
+  <p>Testați funcția <code>eq_Nat</code> rulând:</p>
+  <pre><code>Compute eq_Nat O O.
+Compute eq_Nat one O.
+Compute eq_Nat one one.
+Compute eq_Nat one four.
+Compute eq_Nat five four.
+Compute eq_Nat five five.</code></pre>
+  <ul>
+  <li>Se dă funcția de adunare peste <code>Nat</code>:</li>
+  </ul>
+  <pre><code>Fixpoint add (m n : Nat) : Nat :=
+  match m with
+  | O =&gt; n
+  | S m&#39; =&gt; S (add m&#39; n)
+  end.</code></pre>
+  <p>Testați funcția <code>add</code> rulând:</p>
+  <pre><code>Compute add one one.
+Compute add one five.
+Compute add five one.
+Compute add five O.
+Compute add O five.</code></pre>
+  <ul>
+  <li>Se dă o funcție <code>max</code> care returnează maximul dintre
+  două elemente de tip <code>Nat</code>:</li>
+  </ul>
+  <pre><code>Fixpoint max (m n : Nat) : Nat :=
+  match m with
+  | O =&gt; n
+  | S m&#39; =&gt; match n with
+            | O =&gt; m
+            | S n&#39; =&gt; S (max m&#39; n&#39;)
+            end
+  end.</code></pre>
+  <p>Testați funcția <code>max</code> rulând:</p>
+  <pre><code>Compute max one two.
+Compute max O one.
+Compute max one O.
+Compute max four five.
+Compute max five four.</code></pre>
+  <hr />
+  <h3 id="exerciții-propuse">Exerciții propuse:</h3>
+  <p><strong>1.</strong> (1 punct) Scrieți o funcție <code>le_Nat</code>
+  care primește doi parametri <code>m</code> și <code>n</code> de tip
+  <code>Nat</code> și returnează <code>true</code> dacă <code>m</code>
+  este mai mic sau egal decât <code>n</code>.</p>
+  <pre><code>Fixpoint le_Nat (m n : Nat) : bool :=
+   ...</code></pre>
+  <p>Testați funcția <code>le_Nat</code> pe următoarele exemple
+  (punctajul se acordă în cazul în care toate testele returnează corect
+  rezultatul din comentarii):</p>
+  <pre><code>Compute le_Nat O O. (* true *)
+Compute le_Nat O one. (* true *)
+Compute le_Nat one O. (* false *)
+Compute le_Nat one one. (* true *)
+Compute le_Nat one five. (* true *)
+Compute le_Nat five one. (* false *)
+Compute le_Nat five four. (* false *)
+Compute le_Nat five five. (* true *)</code></pre>
+  <p><strong>2.</strong> (1 punct) Demonstrați următoarea lemă (hint:
+  puteți utiliza <code>induction</code> și <code>inversion</code>):</p>
+  <pre><code>Lemma le_then_O :
+  forall n,
+    le_Nat n O = true -&gt;
+    n = O.
+Proof.
+    ...
+Qed.</code></pre>
+  <p><strong>3.</strong> (1 punct) Demonstrați următoarele leme prin
+  inducție:</p>
+  <pre><code>Lemma le_refl:
+  forall x,
+    le_Nat x x = true.
+Proof.
+    ...
+Qed.
+Lemma le_Trans :
+  forall m n p,
+    le_Nat m n = true -&gt;
+    le_Nat n p = true -&gt;
+    le_Nat m p = true.
+Proof.
+    ...
+Qed.</code></pre>
+  <p><strong>4.</strong> (1 punct) Formulați si demonstrați prin
+  inducție în Coq proprietatea: <code>x</code> este mai mic sau egal
+  decât <code>x + y</code>, pentru orice <code>x</code> și
+  <code>y</code>.</p>
+  <p><strong>5.</strong> (1 punct) Dacă <code>x</code> este mai mic sau
+  egal decât <code>y</code>, atunci <code>x</code> este mai mic decât
+  <code>y + z</code>, pentru orice numere naturale <code>x</code>,
+  <code>y</code> și <code>z</code>. Formulați această proprietate ca
+  lemă în Coq și demonstrați-o prin inducție.</p>
+  <p><strong>6.</strong> (1 punct) Dacă <code>x</code> este mai mic sau
+  egal decât <code>y</code>, atunci maximul dintre <code>x</code> și
+  <code>y</code> este mereu <code>y</code>, pentru orice numere naturale
+  <code>x</code> și <code>y</code>. Formulați această proprietate ca
+  lemă în Coq și demonstrați-o prin inducție.</p>
+  <p><strong>7.</strong> (1 punct) Dacă <code>x</code> nu este mai mic
+  sau egal decât <code>y</code>, atunci maximul dintre <code>x</code> și
+  <code>y</code> este mereu <code>x</code>, pentru orice numere naturale
+  <code>x</code> și <code>y</code>. Formulați această proprietate ca
+  lemă în Coq și demonstrați-o prin inducție.</p>
+  <hr />
+  <p>Coq Reference Manual: <a
+  href="https://coq.inria.fr/distrib/current/refman/">https://coq.inria.fr/distrib/current/refman/</a></p>
+
+  <script>
+    function myFunction() {
+      var modifieddate = document.lastModified;
+      document.write("Last updated: " + modifieddate + " - ");
+      document.write("Copyright &copy; Andrei Arusoaie");
+    }
+    myFunction();
+  </script>
+
+</body>
+
+</html>

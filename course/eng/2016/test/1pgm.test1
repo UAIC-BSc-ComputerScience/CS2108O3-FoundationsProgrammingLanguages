@@ -1,0 +1,8 @@
+var x, y, z;
+x := 1;
+y := 5;
+z := x + x + y;
+if x
+  then if z
+         then y := 2
+         else y := 10

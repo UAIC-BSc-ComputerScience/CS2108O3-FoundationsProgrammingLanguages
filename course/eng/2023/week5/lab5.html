@@ -1,0 +1,194 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+  <!-- link rel="stylesheet" href="https://profs.info.uaic.ro/~arusoaie.andrei/style.css" /-->
+
+  <link rel="stylesheet" href="https://unpkg.com/sakura.css/css/sakura.css" media="screen" />
+  <link rel="stylesheet" href="https://unpkg.com/sakura.css/css/sakura-dark.css"
+    media="screen and (prefers-color-scheme: dark)" />
+
+
+  <title>~arusoaie.andrei/ Andrei Arusoaie</title>
+  <link rel="author" href="../../../index.html" />
+  <link rel="me" href="../../../index.html" />
+  <meta name="subject" content="Personal Web site of Andrei Arusoaie" />
+  <meta name="url" content="https://profs.info.uaic.ro/~arusoaie.andrei/" />
+  <meta name="description" content="Personal Web site of Andrei Arusoaie" />
+  <meta name="author" content="Andrei Arusoaie - https://profs.info.uaic.ro/~arusoaie.andrei/" />
+  <meta property="og:title" content="Personal Web site of Andrei Arusoaie">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://profs.info.uaic.ro/~arusoaie.andrei/">
+  <meta property="og:description" content="Research and Teaching Material">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    table {
+      border-collapse: collapse;
+      border: 2px solid #ddd;
+      width: 100%;
+    }
+
+    th {
+      background-color:#d8d6d65b;
+      border: 2px solid #d8d6d65b;
+      text-align: center;
+    }
+
+    td {
+      text-align: center;
+      padding: 8px;
+      border: 1px solid #ddd;
+    }
+
+  </style>
+
+</head>
+
+<body>
+  <blockquote>
+    <p>[<a href="../../../index.html">Home</a>]
+      [<a href="../../../teaching.html">Teaching</a>]
+      [<a href="../../../research.html">Research</a>]
+      [<a href="../../../index.html#contact">Contact</a>]</p>
+  </blockquote>
+  <hr />
+
+  <h1 id="laborator-sintaxă-abstractă">Laborator: Sintaxă abstractă</h1>
+  <ul>
+  <li>Back to <a href="../plp.html">PLP - Fall 2023</a></li>
+  </ul>
+  <hr />
+  <h3 id="exerciții-de-antrenament">Exerciții de antrenament:</h3>
+  <ul>
+  <li>Lucrul cu șiruri de caractere în Coq:</li>
+  </ul>
+  <pre><code>Require Import String.
+(* Check &quot;a&quot;. throws &#39;Error: No interpretation for string &quot;a&quot;.&#39; *)</code></pre>
+  <p>Pentru a utiliza șiruri de caractere:</p>
+  <pre><code>Open Scope string_scope.
+Check &quot;a&quot;.
+Check  &quot;&quot;.
+Check &quot;abcb&quot;.</code></pre>
+  <h3 id="exerciții-propuse">Exerciții propuse:</h3>
+  <ol type="1">
+  <li>(1 punct) Definiți sintaxa expresii aritmetice care includ: (1)
+  numere naturale, (2) variabile, (3) adunări, (4) scăderi, (5)
+  împărțiri. Pentru acestea veți crea un tip de date inductiv
+  <code>AExp</code> care va avea constructorii:<code>num</code>,
+  <code>var</code>, <code>add</code>, <code>sub</code>, <code>div</code>
+  (enumerați în ordinea corespunzătoare operațiilor 1,2,3,4,5).
+  Utilizați <code>Coercion</code> și <code>Notation</code> astfel încât
+  arborii expresiilor de mai jos să corespundă convențiilor matematice
+  cunoscute (e.g., priorităților dintre <code>+</code>, <code>-</code>
+  și <code>/</code>, asociativitate la stânga pentru operatorii
+  binari):</li>
+  </ol>
+  <pre><code>Check (add (num 2) (add (var &quot;x&quot;) (div (num 2) (var &quot;y&quot;)))).
+Check (add 2 (add &quot;x&quot; (div 2 &quot;y&quot;))).</code></pre>
+  <pre><code>Set Printing Coercions.
+Check (add 2 (add &quot;x&quot; (div 2 &quot;y&quot;))).
+Unset Printing Coercions.</code></pre>
+  <pre><code>Check 2 +&#39; (&quot;x&quot; +&#39; 2 /&#39; &quot;y&quot;).
+Set Printing All.
+Check 2 -&#39; (&quot;x&quot; +&#39; 2 /&#39; &quot;y&quot;).
+Check 2 -&#39; &quot;x&quot; /&#39; &quot;y&quot;.
+Check &quot;x&quot; /&#39; &quot;y&quot; +&#39; 2.
+Check &quot;x&quot; /&#39; &quot;y&quot; /&#39; &quot;z&quot;.
+Unset Printing All.</code></pre>
+  <ol start="2" type="1">
+  <li>(1 punct) Se consideră următoarea definiție inductivă pentru
+  condiții booleene:</li>
+  </ol>
+  <pre><code>Inductive Cond :=
+| base : bool -&gt; Cond
+| bnot : Cond -&gt; Cond
+| beq  : AExp -&gt; AExp -&gt; Cond
+| less : AExp -&gt; AExp -&gt; Cond
+| band : Cond -&gt; Cond -&gt; Cond.</code></pre>
+  <p>Utilizați <code>Coercion</code> și <code>Notation</code> astfel
+  încât arborii expresiilor booleene de mai jos să corespundă
+  convențiilor de parsare obișnuite din limbajele de programare:</p>
+  <pre><code>Check &quot;x&quot; &lt;&#39; &quot;y&quot;.
+Check &quot;x&quot; =&#39; &quot;y&quot;.
+Check ! &quot;x&quot; =&#39; &quot;y&quot;.
+Check &quot;x&quot; &lt;&#39; &quot;y&quot; &amp;&#39; &quot;x&quot; =&#39; &quot;y&quot;.
+Check &quot;x&quot; &lt;&#39; &quot;y&quot; |&#39; &quot;x&quot; =&#39; &quot;y&quot;.
+Check &quot;x&quot; &gt;&#39; &quot;y&quot; |&#39; &quot;x&quot; =&#39; &quot;y&quot;.
+Check &quot;x&quot; &gt;&#39; &quot;y&quot;.
+Check 2 &gt;&#39; &quot;y&quot;.
+Check 3 &gt;&#39; &quot;y&quot;.
+Check &quot;x&quot; &lt;=&#39; &quot;y&quot;.
+Check 3 &lt;=&#39; &quot;y&quot;.
+Check 2 &lt;=&#39; &quot;y&quot;.
+Check &quot;x&quot; &gt;=&#39; &quot;y&quot;.
+Check 2 &gt;=&#39; &quot;y&quot;.
+Check 1 &gt;=&#39; &quot;y&quot;.
+Check !(! &quot;x&quot; &lt;&#39; &quot;y&quot; &amp;&#39; ! &quot;x&quot; =&#39; &quot;y&quot;).
+Check (&quot;x&quot; &lt;&#39; &quot;y&quot; |&#39; &quot;x&quot; =&#39; &quot;y&quot;) .</code></pre>
+  <blockquote>
+  <p><strong>Atenție!</strong> Nu modificați tipul de date
+  <code>Cond</code> adăugând constructori noi pentru operatorii noi
+  (care apar în exemplele de mai sus și care nu au un constructor
+  corespunzător). În schimb, puteți adăuga notații pentru operatorii
+  care nu au un corespondent direct printre constructorii lui
+  <code>Cond</code>.</p>
+  </blockquote>
+  <ol start="3" type="1">
+  <li>(0.5 puncte) Completați tipul de date de mai jos pentru
+  instrucțiunile unui limbaj de programare simplu. Instrucțiunea
+  <code>skip</code> este instrucțiunea care corespunde blocului vid de
+  instrucțiuni, <code>assign</code> corespunde atribuirilor,
+  <code>seq</code> modelează blocuri de instrucțiuni, <code>ite</code>
+  este instrucțiunea decizională cu două ramuri de tip
+  <em>if-then-else</em>, iar <code>while</code> este utilizat pentru
+  bucle de program. Pentru completarea spațiilor goale de mai jos
+  <code>...</code> puteți utiliza tipurile <code>AExp</code> și
+  <code>Cond</code> definite la exercițiile anterioare.</li>
+  </ol>
+  <pre><code>Inductive Stmt :=
+| skip : Stmt
+| assign : string -&gt; AExp -&gt; ...
+| seq : Stmt -&gt; Stmt -&gt; Stmt
+| ite : ...
+| while : ... .</code></pre>
+  <ol start="4" type="1">
+  <li>(0.5 puncte) Utilizați <code>Coercion</code> și
+  <code>Notation</code> astfel încât programele de mai jos să poată fi
+  parsate ca <code>Stmt</code>:</li>
+  </ol>
+  <pre><code>Definition compute_modulo (x y : string) :=
+  &quot;m&quot; ::= 0 ;;
+   while (x &gt;&#39; y) (
+      x ::= x -&#39; y
+   );;
+   ite (x =&#39; y) (&quot;m&quot; ::= 0) (&quot;m&quot; ::= x) ;;
+   &quot;result&quot; ::= &quot;m&quot;.</code></pre>
+  <p>și</p>
+  <pre><code>Definition is_even (x : string) :=
+  ite (x /&#39; 2 =&#39; 0) (&quot;is_even&quot; ::= 1) (&quot;is_even&quot; ::= 0).</code></pre>
+  <ol start="5" type="1">
+  <li><p>(1 punct) Scrieți un program (ce poate fi parsat ca
+  <code>Stmt</code>) care calculează cel mai mare divizor comun a două
+  numere utilizând algoritmul lui Euclid prin scăderi repetate.</p></li>
+  <li><p>(1 punct) Scrieți un program (ce poate fi parsat ca
+  <code>Stmt</code>) care calculează cel de-al <code>n</code>-lea termen
+  al șirului Fibonacci.</p></li>
+  </ol>
+  <hr />
+  <p>Coq Reference Manual: <a
+  href="https://coq.inria.fr/distrib/current/refman/">https://coq.inria.fr/distrib/current/refman/</a></p>
+
+  <script>
+    function myFunction() {
+      var modifieddate = document.lastModified;
+      document.write("Last updated: " + modifieddate + " - ");
+      document.write("Copyright &copy; Andrei Arusoaie");
+    }
+    myFunction();
+  </script>
+
+</body>
+
+</html>

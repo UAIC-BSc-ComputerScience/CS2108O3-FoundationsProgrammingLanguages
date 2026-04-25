@@ -1,0 +1,143 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+  <!-- link rel="stylesheet" href="https://profs.info.uaic.ro/~arusoaie.andrei/style.css" /-->
+
+  <link rel="stylesheet" href="https://unpkg.com/sakura.css/css/sakura.css" media="screen" />
+  <link rel="stylesheet" href="https://unpkg.com/sakura.css/css/sakura-dark.css"
+    media="screen and (prefers-color-scheme: dark)" />
+
+
+  <title>~arusoaie.andrei/ Andrei Arusoaie</title>
+  <link rel="author" href="../../../index.html" />
+  <link rel="me" href="../../../index.html" />
+  <meta name="subject" content="Personal Web site of Andrei Arusoaie" />
+  <meta name="url" content="https://profs.info.uaic.ro/~arusoaie.andrei/" />
+  <meta name="description" content="Personal Web site of Andrei Arusoaie" />
+  <meta name="author" content="Andrei Arusoaie - https://profs.info.uaic.ro/~arusoaie.andrei/" />
+  <meta property="og:title" content="Personal Web site of Andrei Arusoaie">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://profs.info.uaic.ro/~arusoaie.andrei/">
+  <meta property="og:description" content="Research and Teaching Material">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    table {
+      border-collapse: collapse;
+      border: 2px solid #ddd;
+      width: 100%;
+    }
+
+    th {
+      background-color:#d8d6d65b;
+      border: 2px solid #d8d6d65b;
+      text-align: center;
+    }
+
+    td {
+      text-align: center;
+      padding: 8px;
+      border: 1px solid #ddd;
+    }
+
+  </style>
+
+</head>
+
+<body>
+  <blockquote>
+    <p>[<a href="../../../index.html">Home</a>]
+      [<a href="../../../teaching.html">Teaching</a>]
+      [<a href="../../../research.html">Research</a>]
+      [<a href="../../../index.html#contact">Contact</a>]</p>
+  </blockquote>
+  <hr />
+
+  <h1
+  id="laborator---polimorfism.-funcții-de-ordin-superior.-demonstrații.">Laborator
+  - Polimorfism. Funcții de ordin superior. Demonstrații.</h1>
+  <ul>
+  <li>Back to <a href="../plp.html">PLP - Fall 2023</a></li>
+  <li>Tactics <a
+  href="https://www.cs.cornell.edu/courses/cs3110/2018sp/a5/coq-tactics-cheatsheet.html">CheatSheet</a></li>
+  </ul>
+  <h3 id="exerciții-de-antrenament">Exerciții de antrenament</h3>
+  <p>Demonstrați următoarele teoreme:</p>
+  <pre><code>Theorem and_elim_1:
+  forall (A B : Prop), A /\ B -&gt; A.
+Admitted.</code></pre>
+  <pre><code>Theorem and_elim_2:
+  forall (A B : Prop), A /\ B -&gt; B.
+Admitted.</code></pre>
+  <pre><code>Theorem and_intro:
+  forall (A B : Prop), A -&gt; B -&gt; (A /\ B).
+Admitted.</code></pre>
+  <pre><code>Theorem or_elim:
+  forall (A B C: Prop), (A -&gt; C) -&gt; (B -&gt; C) -&gt; (A \/ B) -&gt; C.
+Proof.
+Admitted.</code></pre>
+  <pre><code>Theorem or_intro_1:
+  forall (A B : Prop), A -&gt; (A \/ B).
+Proof.
+Admitted.</code></pre>
+  <pre><code>Theorem or_intro_2:
+  forall (A B : Prop), B -&gt; (A \/ B).
+Proof.
+Admitted.</code></pre>
+  <pre><code>Theorem not_not:
+  forall (P : Prop), P -&gt; ~~P.
+Proof.
+Admitted.</code></pre>
+  <pre><code>Theorem mp :
+  forall A B,
+    (A -&gt; B) -&gt; A -&gt; B.
+Proof.
+Admitted.</code></pre>
+  <pre><code>Theorem mt :
+  forall (A B : Prop),
+    (A -&gt; B) -&gt; ~ B -&gt; ~ A.
+Proof.</code></pre>
+  <h3 id="exerciții-propuse">Exerciții propuse:</h3>
+  <ol type="1">
+  <li><p>(1 punct) Definiți un tip de date polimorfic pentru arbori
+  binari.</p></li>
+  <li><p>(0.5 puncte) Definiți o funcție <code>size</code> care
+  calculează numărul de noduri al un arbore binar (al cărui tip a fost
+  definit la exercițiul 1) dat ca parametru. Pentru valoarea de return
+  folosiți tipul <code>nat</code> din Coq (detalii <a
+  href="https://coq.inria.fr/doc/v8.11/stdlib/Coq.Init.Nat.html">AICI</a>).</p></li>
+  <li><p>(0.5 puncte) Definiți o funcție <code>height</code> care
+  calculează înățimea unui arbore binar (al cărui tip a fost definit la
+  exercițiul 1) dat ca parametru. Pentru valoarea de return folosiți
+  tipul <code>nat</code> din Coq.</p></li>
+  <li><p>(1 punct) Demonstrați că valoarea returnată de funcția
+  <code>height</code> este mai mică sau egală decât valoarea returnată
+  de funcția <code>size</code>.</p></li>
+  <li><p>(3 puncte) Scrieți o funcție de nivel superior denumită
+  <code>flatten</code> care primește un arbore binar parametric în tipul
+  <code>T</code> și o funcție <code>f</code> de tip
+  <code>T -&gt; T</code> și returnează o listă de tipul
+  <code>list T</code>. Această listă conține elementele arborelui
+  corespunzătoare parcurgerii preordine, peste care s-a aplicat funcția
+  <code>f</code>. Detalii despre tipul parametric <code>list</code> sunt
+  disponibile <a
+  href="https://coq.inria.fr/doc/V8.11+beta1/stdlib/Coq.Lists.List.html">AICI</a>.</p></li>
+  </ol>
+  <hr />
+  <p>Coq Reference Manual: <a
+  href="https://coq.inria.fr/distrib/current/refman/">https://coq.inria.fr/distrib/current/refman/</a></p>
+
+  <script>
+    function myFunction() {
+      var modifieddate = document.lastModified;
+      document.write("Last updated: " + modifieddate + " - ");
+      document.write("Copyright &copy; Andrei Arusoaie");
+    }
+    myFunction();
+  </script>
+
+</body>
+
+</html>

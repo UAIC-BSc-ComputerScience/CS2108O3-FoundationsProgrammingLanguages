@@ -1,0 +1,1651 @@
+<!DOCTYPE html><html><head><a id="Top"> </a><link rel="stylesheet" type="text/css" href="../../../main.css"><link rel="stylesheet" type="text/css" href="../../../bootstrap.min.css"><meta name="viewport" content="width=device-width, initial-scale=1.0"></head><body><h4><a href="../../../index.html">home</a> &#8226 <a href="../../../pages/Teaching.html">teaching</a> &#8226 <a href="../../../pages/Research.html">research</a> &#8226 <a href="../../../index.html#contact">contact</a></h4><hr><div id="wrap"><h2>Principles of Programming Languages</h2><hr>
+<h2><a href="https://profs.info.uaic.ro/~arusoaie.andrei/old/lectures/PLP/2018/note.pdf">Final grades</a></h2><h2>Quick links</h2><ul>
+<li><a href="plp.html#weeks">Weekly activities</a></li>
+<li><a href="plp.html#Evaluation">Evaluation</a></li>
+<li><a href="https://www.facebook.com/groups/230192561164535/">Facebook group</a></li>
+<li><a href="plp.html#Contents">Contents</a> </li>
+<li><a href="plp.html#motivation">Motivation &amp; Description</a></li>
+<li><a href="plp.html#linksbib">Useful links and Bibliography</a></li>
+<li>Course description <ul>
+<li><a href="https://profs.info.uaic.ro/~arusoaie.andrei/old/lectures/PLP/Fisa_disciplinei_PLP.pdf">PDF document in Romanian</a></li>
+<li><a href="https://profs.info.uaic.ro/~arusoaie.andrei/old/lectures/PLP/Fisa_disciplinei_PLP_en.pdf">PDF document in English</a></li>
+</ul>
+</li>
+<li><a href="https://profs.info.uaic.ro/~orar/discipline/orar_palp.html">Schedule</a></li>
+<li><strong><a href="https://profs.info.uaic.ro/~arusoaie.andrei/old/lectures/PLP/2018/projects.html">Project ideas</a></strong></li>
+</ul>
+<h3>Note: All project submissions must be sent over this email address: <a href="mailto:arusoaie.andrei@info.uaic.ro">arusoaie.andrei@info.uaic.ro</a>. I cannot guarantee you that your email will get to me if you send it to the other email addresses that I have.</h3><h3>Note: In January we scheduled the evaluation of your projects. The evaluation is done during the labs.</h3><hr>
+<p><a id="weeks"> </a></p>
+<h2>Weeks</h2><ul>
+<li><a href="plp.html#week1">Week 1</a></li>
+<li><a href="plp.html#week2">Week 2</a></li>
+<li><a href="plp.html#week3">Week 3</a></li>
+<li><a href="plp.html#week4">Week 4</a></li>
+<li><a href="plp.html#week5">Week 5</a></li>
+<li><a href="plp.html#week6">Week 6</a></li>
+<li><a href="plp.html#week7">Week 7</a></li>
+<li>Week 8: midterm</li>
+<li><a href="plp.html#week9">Week 9</a></li>
+<li><a href="plp.html#week10">Week 10</a></li>
+<li><a href="plp.html#week11">Week 11</a></li>
+<li><a href="plp.html#week12">Week 12</a></li>
+<li><a href="plp.html#week13">Week 13</a></li>
+<li><a href="plp.html#week14">Week 14</a></li>
+</ul>
+<p><a id="week1"> </a></p>
+<hr>
+
+<p>#</p>
+<h2>Week 1</h2><ul>
+<li>No lecture in the first week due to opening activities at the university.</li>
+<li>Lab: <a href="https://profs.info.uaic.ro/~arusoaie.andrei/old/lectures/PLP/2018/week1/lab1.html">#1</a></li>
+<li>Optional bibliography: <a href="http://fsl.cs.illinois.edu/index.php/Executing_Formal_Semantics_with_the_K_Tool">Executing formal semantics with the K tool</a></li>
+</ul>
+<p align="right"><a href="plp.html#top">[Go to top]</a></p>
+
+<p><a id="week2"> </a></p>
+<hr>
+
+<h3>Week 2</h3><ul>
+<li>Lecture: <a href="https://profs.info.uaic.ro/~arusoaie.andrei/old/lectures/PLP/2018/week2/lecture1.pdf">Slides</a></li>
+<li>Lab: <a href="https://profs.info.uaic.ro/~arusoaie.andrei/old/lectures/PLP/2018/week2/lab2.html">#2</a></li>
+<li>Bibliography: Chapter 13 from the <a href="http://websrv.dthu.edu.vn/attachments/newsevents/content2415/Programming_Languages_-_Principles_and_Paradigms_thereds1106.pdf">BOOK</a>.</li>
+</ul>
+<p align="right"><a href="plp.html#top">[Go to top]</a></p>
+
+
+<p><a id="week3"> </a></p>
+<hr>
+
+<h3>Week 3</h3><ul>
+<li>Lecture: <a href="https://profs.info.uaic.ro/~arusoaie.andrei/old/lectures/PLP/2018/week3/lecture2.pdf">Slides</a></li>
+<li>Lab: <a href="https://profs.info.uaic.ro/~arusoaie.andrei/old/lectures/PLP/2018/week3/lab2.html">#3</a></li>
+<li>Bibliography: sections 2.1-2.4 from the <a href="http://websrv.dthu.edu.vn/attachments/newsevents/content2415/Programming_Languages_-_Principles_and_Paradigms_thereds1106.pdf">BOOK</a>.</li>
+<li>Lab bibliography: lesson 1 from <a href="https://github.com/kframework/k-legacy/tree/master/k-distribution/tutorial/1_k/2_imp/">IMP</a>.</li>
+<li>Lecture demo: </li>
+</ul>
+<p>The syntax of a simple imperative language which has arithmetic expressions, boolean expressions, statements and blocks of statements.</p>
+<pre><code>module IMP-SYNTAX
+  syntax AExp ::= Int // builtin
+                | Id  // builtin
+                &gt; left:
+                  AExp &quot;*&quot; AExp [left]
+                | AExp &quot;/&quot; AExp [left]
+                &gt; left:
+                  AExp &quot;+&quot; AExp [left, klabel(plus)]
+                | AExp &quot;-&quot; AExp [left]
+                | &quot;(&quot; AExp &quot;)&quot;  [bracket]
+
+  syntax BExp ::= Bool // builtin
+                | &quot;!&quot; BExp
+                | BExp &quot;&amp;&amp;&quot; BExp [non-assoc]
+                | AExp &quot;&lt;=&quot; AExp
+                | AExp &quot;&lt;&quot;  AExp
+                | &quot;(&quot; BExp &quot;)&quot; [bracket]
+
+  syntax Block ::= &quot;{&quot; Stmt &quot;}&quot;
+                 | &quot;{&quot; &quot;}&quot;
+
+  syntax Stmt ::= Id &quot;=&quot; AExp &quot;;&quot;
+                | &quot;if&quot; BExp Block &quot;else&quot; Block
+                | &quot;while&quot; BExp Block
+                &gt; Stmt Stmt [right]
+endmodule
+
+module IMP
+  imports IMP-SYNTAX
+
+  configuration &lt;k&gt; $PGM:Stmt &lt;/k&gt;
+endmodule</code></pre><p>If the above definition is stored in <code>imp.k</code> then the above definition can be compiled as below:</p>
+<pre><code>-$ kompile imp.k</code></pre><p>A simple program <code>sum.imp</code> written using our language:</p>
+<pre><code>sum = 0;
+if (n &lt;= 0) {
+  sum = -1;
+}
+else {
+  i = 1;
+  while (i &lt;= n) {
+    sum = sum + i;
+    i = i + 1;
+  }
+}</code></pre><p>Parsing the program using <code>kast</code>:</p>
+<pre><code>-$ kast sum.imp 
+`__`(`_=_;`(#token(&quot;sum&quot;,&quot;Id&quot;),#token(&quot;0&quot;,&quot;Int&quot;)),`if__else_`(`_&lt;=_`(#token(&quot;n&quot;,&quot;Id&quot;),#token(&quot;0&quot;,&quot;Int&quot;)),`{_}`(`_=_;`(#token(&quot;sum&quot;,&quot;Id&quot;),#token(&quot;-1&quot;,&quot;Int&quot;))),`{_}`(`__`(`_=_;`(#token(&quot;i&quot;,&quot;Id&quot;),#token(&quot;1&quot;,&quot;Int&quot;)),`while__`(`_&lt;=_`(#token(&quot;i&quot;,&quot;Id&quot;),#token(&quot;n&quot;,&quot;Id&quot;)),`{_}`(`__`(`_=_;`(#token(&quot;sum&quot;,&quot;Id&quot;),plus(#token(&quot;sum&quot;,&quot;Id&quot;),#token(&quot;i&quot;,&quot;Id&quot;))),`_=_;`(#token(&quot;i&quot;,&quot;Id&quot;),plus(#token(&quot;i&quot;,&quot;Id&quot;),#token(&quot;1&quot;,&quot;Int&quot;))))))))))</code></pre><p align="right"><a href="plp.html#top">[Go to top]</a></p>
+
+<hr>
+<p><a id="week4"> </a></p>
+<hr>
+
+<h3>Week 4</h3><ul>
+<li>Lecture: <a href="https://profs.info.uaic.ro/~arusoaie.andrei/old/lectures/PLP/2018/week4/lecture3.pdf">Slides</a></li>
+<li>Informal K <a href="https://profs.info.uaic.ro/~arusoaie.andrei/old/lectures/PLP/2018/week4/informal-k.pdf">tutorial</a></li>
+<li>Lab: <a href="https://profs.info.uaic.ro/~arusoaie.andrei/old/lectures/PLP/2018/week4/lab3.html">#4</a></li>
+<li>Bibliography: section 2.5 and chapter 6 from the <a href="http://websrv.dthu.edu.vn/attachments/newsevents/content2415/Programming_Languages_-_Principles_and_Paradigms_thereds1106.pdf">BOOK</a>.</li>
+<li>Lecture demo:</li>
+</ul>
+<p>An incomplete semantics of IMP:</p>
+<pre><code>module IMP-SYNTAX
+  syntax AExp ::= Int // builtin
+                | Id  // builtin
+                &gt; left:
+                  AExp &quot;*&quot; AExp [left]
+                | AExp &quot;/&quot; AExp [left]
+                &gt; left:
+                  AExp &quot;+&quot; AExp [left, strict]
+                | AExp &quot;-&quot; AExp [left]
+                | &quot;(&quot; AExp &quot;)&quot;  [bracket]
+
+  syntax BExp ::= Bool // builtin
+                | &quot;!&quot; BExp
+                | BExp &quot;&amp;&amp;&quot; BExp [non-assoc]
+                | AExp &quot;&lt;=&quot; AExp [strict]
+                | AExp &quot;&lt;&quot;  AExp
+                | &quot;(&quot; BExp &quot;)&quot; [bracket]
+
+  syntax Block ::= &quot;{&quot; Stmt &quot;}&quot;
+                 | &quot;{&quot; &quot;}&quot;
+
+  syntax Stmt ::= &quot;int&quot; Id &quot;;&quot;
+                |Id &quot;=&quot; AExp &quot;;&quot;  [strict(2)]
+                | &quot;if&quot; BExp Block &quot;else&quot; Block [strict(1)]
+                | &quot;while&quot; BExp Block
+                &gt; Stmt Stmt [right]
+endmodule
+
+module IMP
+  imports IMP-SYNTAX
+
+  syntax KResult ::= Bool | Int
+
+  configuration &lt;k&gt; $PGM:Stmt &lt;/k&gt;
+                &lt;env&gt; .Map &lt;/env&gt;
+
+  rule I1:Int &lt;= I2:Int =&gt; I1 &lt;=Int I2
+  rule I1:Int + I2:Int =&gt; I1 +Int I2
+
+  rule S1:Stmt S2:Stmt =&gt; S1 ~&gt; S2
+
+  rule &lt;k&gt; int X:Id ; =&gt; . ...&lt;/k&gt;
+       &lt;env&gt; M:Map (.Map =&gt; X |-&gt; 0) &lt;/env&gt;
+       when notBool(X in keys(M))
+
+  rule &lt;k&gt; (X:Id = V:Int ; =&gt; .)  ...&lt;/k&gt;
+       &lt;env&gt;... X |-&gt; (_ =&gt; V)  ...&lt;/env&gt;
+
+  rule &lt;k&gt; (X:Id =&gt; V) ...&lt;/k&gt;
+       &lt;env&gt;... X |-&gt; V:Int ...&lt;/env&gt;
+
+  rule if true  B1:Block else B2:Block =&gt; B1 
+  rule if false B1:Block else B2:Block =&gt; B2 
+
+  rule { S:Stmt } =&gt; S
+  rule { } =&gt; .
+
+  rule while B:BExp { S:Stmt } =&gt;
+       if B { S while B { S } } else { }
+endmodule</code></pre><p>With this semantics we can execute the following program:</p>
+<pre><code>int n;
+int sum;
+int i;
+sum = 0;
+n = 10;
+
+if (n &lt;= 0) {
+  sum = -1;
+}
+else {
+  i = 1;
+  while (i &lt;= n) {
+    sum = sum + i;
+    i = i + 1;
+  }
+}</code></pre><p align="right"><a href="plp.html#top">[Go to top]</a></p>
+
+<hr>
+<p><a id="week5"> </a></p>
+<hr>
+
+<h3>Week 5</h3><ul>
+<li><p>Lecture: <a href="https://profs.info.uaic.ro/~arusoaie.andrei/old/lectures/PLP/2018/week5/lecture4.pdf">Slides</a></p>
+</li>
+<li><p>Lab: <a href="https://profs.info.uaic.ro/~arusoaie.andrei/old/lectures/PLP/2018/week5/lab4.html">#5</a></p>
+</li>
+<li><p>Bibliography:  Section 3 from the <a href="http://fsl.cs.illinois.edu/FSL/papers/2017/rosu-2017-marktoberdorf/rosu-2017-marktoberdorf-public.pdf">Marktoberdorf tutorial</a>.</p>
+</li>
+<li><p>References: lessons 1-3 from <a href="https://github.com/kframework/k-legacy/tree/master/k-distribution/tutorial/1_k/4_imp%2B%2B">IMP++</a>.</p>
+</li>
+<li><p>Optional bibliography: <a href="http://fsl.cs.illinois.edu/index.php/Executing_Formal_Semantics_with_the_K_Tool">Executing Formal Semantics with the K Tool</a>.</p>
+</li>
+<li><p>Lecture demo:</p>
+</li>
+</ul>
+<pre><code>module IMP-SYNTAX
+  syntax AExp ::= Int // builtin
+                | Id  // builtin
+                | String // builtin
+                | &quot;read&quot; &quot;(&quot; &quot;)&quot;
+                | &quot;++&quot; Id
+                &gt; left:
+                  AExp &quot;*&quot; AExp [left]
+                | AExp &quot;/&quot; AExp [left]
+                &gt; left:
+                  AExp &quot;+&quot; AExp [left, strict]
+                | AExp &quot;-&quot; AExp [left]
+                | &quot;(&quot; AExp &quot;)&quot;  [bracket]
+
+  syntax BExp ::= Bool // builtin
+                | &quot;!&quot; BExp
+                | BExp &quot;&amp;&amp;&quot; BExp [non-assoc]
+                | AExp &quot;&lt;=&quot; AExp [strict]
+                | AExp &quot;&lt;&quot;  AExp
+                | &quot;(&quot; BExp &quot;)&quot; [bracket]
+
+  syntax Block ::= &quot;{&quot; Stmt &quot;}&quot;
+                 | &quot;{&quot; &quot;}&quot;
+
+  syntax Stmt ::= Block
+                | &quot;int&quot; Id &quot;;&quot;
+                | &quot;print&quot; &quot;(&quot; AExp &quot;)&quot; &quot;;&quot; [strict]
+                |Id &quot;=&quot; AExp &quot;;&quot;  [strict(2)]
+                | &quot;if&quot; BExp Block &quot;else&quot; Block [strict(1)]
+                | &quot;while&quot; BExp Block
+                &gt; Stmt Stmt [right]
+endmodule
+
+module IMP
+  imports IMP-SYNTAX
+
+  syntax KResult ::= Bool | Int | String
+
+  configuration &lt;k&gt; $PGM:Stmt &lt;/k&gt;
+                &lt;env&gt; .Map &lt;/env&gt;
+                &lt;store&gt; .Map &lt;/store&gt;
+                &lt;stack&gt; .List &lt;/stack&gt;
+                &lt;in stream=&quot;stdin&quot;&gt; .List &lt;/in&gt;
+                &lt;out stream=&quot;stdout&quot;&gt; .List &lt;/out&gt;
+
+  rule I1:Int &lt;= I2:Int =&gt; I1 &lt;=Int I2
+  rule I1:Int + I2:Int =&gt; I1 +Int I2
+
+  rule S1:Stmt S2:Stmt =&gt; S1 ~&gt; S2
+
+  rule &lt;k&gt; int X:Id ; =&gt; . ...&lt;/k&gt;
+       &lt;env&gt; M:Map =&gt; M[X &lt;- !L:Int] &lt;/env&gt;
+       &lt;store&gt; M&#39;:Map (.Map =&gt; !L |-&gt; 0) &lt;/store&gt;
+
+   rule &lt;k&gt; (X:Id = V:Int ; =&gt; .)  ...&lt;/k&gt;
+        &lt;env&gt;... X |-&gt; L:Int  ...&lt;/env&gt;
+        &lt;store&gt;... L |-&gt; (_ =&gt; V) ...&lt;/store&gt;
+
+   rule &lt;k&gt; (X:Id =&gt; V) ...&lt;/k&gt;
+        &lt;env&gt;... X |-&gt; L:Int ...&lt;/env&gt;
+        &lt;store&gt;... L |-&gt; V:Int ...&lt;/store&gt;
+
+  rule if true  B1:Block else B2:Block =&gt; B1 
+  rule if false B1:Block else B2:Block =&gt; B2 
+
+  syntax KItem ::= &quot;restoreEnv&quot;
+  rule &lt;k&gt; { S:Stmt } =&gt; S ~&gt; restoreEnv ...&lt;/k&gt;
+       &lt;env&gt; Env &lt;/env&gt;
+       &lt;stack&gt; (.List =&gt; ListItem(Env)) ...&lt;/stack&gt;
+
+  rule &lt;k&gt; (restoreEnv =&gt; .) ...&lt;/k&gt;
+       &lt;env&gt; _ =&gt; Env:Map &lt;/env&gt;
+       &lt;stack&gt; (ListItem(Env) =&gt; .List) ...&lt;/stack&gt;
+
+rule { } =&gt; .
+
+  rule while B:BExp { S:Stmt } =&gt;
+       if B { S while B { S } } else { }
+
+  // increment
+  rule &lt;k&gt; ( ++ X:Id =&gt; V +Int 1) ...&lt;/k&gt;
+       &lt;env&gt;... X |-&gt; L ...&lt;/env&gt;
+       &lt;store&gt;... (L:Int |-&gt; (V:Int=&gt; V +Int 1)) ...&lt;/store&gt;
+
+  // read
+  rule &lt;k&gt; (read() =&gt; V) ...&lt;/k&gt;
+       &lt;in&gt; (ListItem(V:Int) =&gt; .List) ...&lt;/in&gt;
+
+  // print
+  syntax Printable ::= Int | String 
+  syntax AExp ::= Printable
+  rule &lt;k&gt; (print(V:Printable); =&gt; .) ...&lt;/k&gt;
+       &lt;out&gt;... (.List =&gt; ListItem(V)) &lt;/out&gt;
+
+endmodule</code></pre><p>Example:</p>
+<pre><code>int n;
+n = read();
+n = ++n;
+
+int y;
+y = 10;
+
+print(&quot;n = &quot;); print(n); print(&quot;\n&quot;);
+print(&quot;y = &quot;); print(y); print(&quot;\n&quot;);
+
+{
+  int n;
+  n = 214325;
+  int y;
+  y = 4;
+  print(&quot;in block1 n = &quot;); print(n); print(&quot;\n&quot;);
+  print(&quot;in block1 y = &quot;); print(y); print(&quot;\n&quot;);
+
+  {
+    int n;
+    n = 900000;
+    print(&quot;in block2 n = &quot;); print(n); print(&quot;\n&quot;);
+    print(&quot;in block2 y = &quot;); print(y); print(&quot;\n&quot;);
+  }
+
+  print(&quot;in block1 n = &quot;); print(n); print(&quot;\n&quot;);
+  print(&quot;in block1 y = &quot;); print(y); print(&quot;\n&quot;);
+
+}
+print(&quot;n = &quot;); print(n); print(&quot;\n&quot;);
+print(&quot;y = &quot;); print(y); print(&quot;\n&quot;);</code></pre><p>How to run the program:</p>
+<pre><code>-$ echo 5 | krun test.imp --output none 
+n = 6
+y = 10
+in block1 n = 214325
+in block1 y = 4
+in block2 n = 900000
+in block2 y = 4
+in block1 n = 214325
+in block1 y = 4
+n = 6
+y = 10</code></pre><p align="right"><a href="plp.html#top">[Go to top]</a></p>
+
+<hr>
+<p><a id="week6"> </a></p>
+<hr>
+
+<h3>Week 6</h3><ul>
+<li>Lecture: <a href="https://profs.info.uaic.ro/~arusoaie.andrei/old/lectures/PLP/2018/week6/lecture5.pdf">Slides</a></li>
+<li>Lab: <a href="https://profs.info.uaic.ro/~arusoaie.andrei/old/lectures/PLP/2018/week6/lab5.html">#6</a></li>
+<li>Bibliography: Section 8.4.7 from the <a href="http://websrv.dthu.edu.vn/attachments/newsevents/content2415/Programming_Languages_-_Principles_and_Paradigms_thereds1106.pdf">BOOK</a></li>
+<li>Lab bibliography: lessons 4-8 from <a href="https://github.com/kframework/k-legacy/tree/master/k-distribution/tutorial/1_k/4_imp%2B%2B">IMP++</a>.</li>
+<li>Optional bibliography: <a href="http://fsl.cs.illinois.edu/index.php/Executing_Formal_Semantics_with_the_K_Tool">Executing Formal Semantics with the K Tool</a></li>
+<li>Lecture demo:</li>
+</ul>
+<pre><code>module IMP-SYNTAX
+  syntax AExp ::= Int // builtin
+                | Id  // builtin
+                | String // builtin
+                | &quot;read&quot; &quot;(&quot; &quot;)&quot;
+                | &quot;++&quot; Id
+                &gt; left:
+                  AExp &quot;*&quot; AExp [left]
+                | AExp &quot;/&quot; AExp [left, strict, division]
+                &gt; left:
+                  AExp &quot;+&quot; AExp [left, strict, plus]
+                | AExp &quot;-&quot; AExp [left]
+                | &quot;(&quot; AExp &quot;)&quot;  [bracket]
+
+  syntax BExp ::= Bool // builtin
+                | &quot;!&quot; BExp
+                | BExp &quot;&amp;&amp;&quot; BExp [non-assoc]
+                | AExp &quot;&lt;=&quot; AExp [strict]
+                | AExp &quot;&lt;&quot;  AExp
+                | &quot;(&quot; BExp &quot;)&quot; [bracket]
+
+  syntax Block ::= &quot;{&quot; Stmt &quot;}&quot;
+                 | &quot;{&quot; &quot;}&quot;
+
+  syntax Stmt ::= Block
+                | &quot;int&quot; Id &quot;;&quot;
+                | &quot;print&quot; &quot;(&quot; AExp &quot;)&quot; &quot;;&quot; [strict]
+                | Id &quot;=&quot; AExp &quot;;&quot;  [strict(2)]
+                | &quot;if&quot; BExp Block &quot;else&quot; Block [strict(1)]
+                | &quot;while&quot; BExp Block
+                | &quot;spawn&quot; Stmt 
+                &gt; Stmt Stmt [right]
+endmodule
+
+module IMP
+  imports IMP-SYNTAX
+
+  syntax KResult ::= Bool | Int | String
+
+  configuration &lt;T&gt;
+                  &lt;threads&gt;
+                    &lt;thread multiplicity=&quot;*&quot;&gt;
+                      &lt;k&gt; $PGM:Stmt &lt;/k&gt;
+                      &lt;env&gt; .Map &lt;/env&gt;
+                      &lt;stack&gt; .List &lt;/stack&gt;
+                    &lt;/thread&gt;
+                  &lt;/threads&gt;
+                  &lt;store&gt; .Map &lt;/store&gt;
+                  &lt;in stream=&quot;stdin&quot;&gt; .List &lt;/in&gt;
+                  &lt;out stream=&quot;stdout&quot;&gt; .List &lt;/out&gt;
+                &lt;/T&gt;
+
+  rule I1:Int &lt;= I2:Int =&gt; I1 &lt;=Int I2
+  rule I1:Int + I2:Int =&gt; I1 +Int I2
+  rule I1:Int / I2:Int =&gt; I1 /Int I2 when I2 =/=Int 0
+
+  rule S1:Stmt S2:Stmt =&gt; S1 ~&gt; S2
+
+  rule &lt;k&gt; int X:Id ; =&gt; . ...&lt;/k&gt;
+       &lt;env&gt; M:Map =&gt; M[X &lt;- !L:Int] &lt;/env&gt;
+       &lt;store&gt; M&#39;:Map (.Map =&gt; !L |-&gt; 0) &lt;/store&gt;
+
+   rule &lt;k&gt; (X:Id = V:Int ; =&gt; .)  ...&lt;/k&gt;
+        &lt;env&gt;... X |-&gt; L:Int  ...&lt;/env&gt;
+        &lt;store&gt;... L |-&gt; (_ =&gt; V) ...&lt;/store&gt; [assign]
+
+   rule &lt;k&gt; (X:Id =&gt; V) ...&lt;/k&gt;
+        &lt;env&gt;... X |-&gt; L:Int ...&lt;/env&gt;
+        &lt;store&gt;... L |-&gt; V:Int ...&lt;/store&gt;  [lookup]
+
+  rule if true  B1:Block else B2:Block =&gt; B1 
+  rule if false B1:Block else B2:Block =&gt; B2 
+
+  syntax KItem ::= &quot;restoreEnv&quot;
+  rule &lt;k&gt; { S:Stmt } =&gt; S ~&gt; restoreEnv ...&lt;/k&gt;
+       &lt;env&gt; Env &lt;/env&gt;
+       &lt;stack&gt; (.List =&gt; ListItem(Env)) ...&lt;/stack&gt;
+
+  rule &lt;k&gt; (restoreEnv =&gt; .) ...&lt;/k&gt;
+       &lt;env&gt; _ =&gt; Env:Map &lt;/env&gt;
+       &lt;stack&gt; (ListItem(Env) =&gt; .List) ...&lt;/stack&gt;
+
+rule { } =&gt; .
+
+  rule while B:BExp { S:Stmt } =&gt;
+       if B { S while B { S } } else { }
+
+  // increment
+  rule &lt;k&gt; ( ++ X:Id =&gt; V +Int 1) ...&lt;/k&gt;
+       &lt;env&gt;... X |-&gt; L ...&lt;/env&gt;
+       &lt;store&gt;... (L:Int |-&gt; (V:Int=&gt; V +Int 1)) ...&lt;/store&gt;
+
+  // read
+  rule &lt;k&gt; (read() =&gt; V) ...&lt;/k&gt;
+       &lt;in&gt; (ListItem(V:Int) =&gt; .List) ...&lt;/in&gt;  [read]
+
+  // print
+  syntax Printable ::= Int | String 
+  syntax AExp ::= Printable
+  rule &lt;k&gt; (print(V:Printable); =&gt; .) ...&lt;/k&gt;
+       &lt;out&gt;... (.List =&gt; ListItem(V)) &lt;/out&gt;
+
+  // spawn
+  rule &lt;k&gt; (spawn S =&gt; .) ...&lt;/k&gt; &lt;env&gt; Rho &lt;/env&gt;
+       (.Bag =&gt; &lt;thread&gt;...
+                  &lt;k&gt; S &lt;/k&gt;
+                  &lt;env&gt; Rho &lt;/env&gt;
+                ...&lt;/thread&gt;)
+
+  // thread termination
+  rule (&lt;thread&gt; &lt;k&gt; . &lt;/k&gt; ...&lt;/thread&gt; =&gt; .Bag)
+
+endmodule</code></pre><p>Compile the definition using <code>--transition</code>:</p>
+<pre><code>-$ kompile imp.k --transition &quot;division plus assign lookup read&quot;</code></pre><p>Now, write the following program in <code>test.imp</code>:</p>
+<pre><code>int x;
+int y;
+x = read();
+spawn { x = x / 2; print(&quot;x1 = &quot;); print(x); print(&quot;\n&quot;);}
+spawn { x = x + 10; print(&quot;x2 = &quot;); print(x); print(&quot;\n&quot;);}
+print(&quot;x = &quot;); print(x); print(&quot;\n&quot;);</code></pre><p>Explore non-determinism of threads:</p>
+<pre><code>-$ echo 10 | krun test.imp --search
+Search results:
+
+Solution 1:
+&lt;T&gt; &lt;threads&gt; .ThreadCellBag &lt;/threads&gt; &lt;store&gt; 1 |-&gt; 10 2 |-&gt; 0 &lt;/store&gt; &lt;in&gt; ListItem ( #buffer ( &quot;&quot; ) ) ListItem ( &quot;off&quot; ) ListItem ( #istream ( 0 ) ) &lt;/in&gt; &lt;out&gt; ListItem ( #ostream ( 1 ) ) ListItem ( &quot;off&quot; ) ListItem ( #buffer ( &quot;x = 10\nx2 = 20\nx1 = 10\n&quot; ) ) &lt;/out&gt; &lt;/T&gt;
+
+Solution 2:
+&lt;T&gt; &lt;threads&gt; .ThreadCellBag &lt;/threads&gt; &lt;store&gt; 1 |-&gt; 10 2 |-&gt; 0 &lt;/store&gt; &lt;in&gt; ListItem ( #buffer ( &quot;&quot; ) ) ListItem ( &quot;off&quot; ) ListItem ( #istream ( 0 ) ) &lt;/in&gt; &lt;out&gt; ListItem ( #ostream ( 1 ) ) ListItem ( &quot;off&quot; ) ListItem ( #buffer ( &quot;x = 10\nx2 = x1 = 10\n10\n&quot; ) ) &lt;/out&gt; &lt;/T&gt;
+
+Solution 3:
+&lt;T&gt; &lt;threads&gt; .ThreadCellBag &lt;/threads&gt; &lt;store&gt; 1 |-&gt; 10 2 |-&gt; 0 &lt;/store&gt; &lt;in&gt; ListItem ( #buffer ( &quot;&quot; ) ) ListItem ( &quot;off&quot; ) ListItem ( #istream ( 0 ) ) &lt;/in&gt; &lt;out&gt; ListItem ( #ostream ( 1 ) ) ListItem ( &quot;off&quot; ) ListItem ( #buffer ( &quot;x = x2 = 20\n20\nx1 = 10\n&quot; ) ) &lt;/out&gt; &lt;/T&gt;
+
+Solution 4:
+&lt;T&gt; &lt;threads&gt; .ThreadCellBag &lt;/threads&gt; &lt;store&gt; 1 |-&gt; 10 2 |-&gt; 0 &lt;/store&gt; &lt;in&gt; ListItem ( #buffer ( &quot;&quot; ) ) ListItem ( &quot;off&quot; ) ListItem ( #istream ( 0 ) ) &lt;/in&gt; &lt;out&gt; ListItem ( #ostream ( 1 ) ) ListItem ( &quot;off&quot; ) ListItem ( #buffer ( &quot;x = x2 = 20\nx1 = 10\n10\n&quot; ) ) &lt;/out&gt; &lt;/T&gt;
+
+Solution 5:
+&lt;T&gt; &lt;threads&gt; .ThreadCellBag &lt;/threads&gt; &lt;store&gt; 1 |-&gt; 10 2 |-&gt; 0 &lt;/store&gt; &lt;in&gt; ListItem ( #buffer ( &quot;&quot; ) ) ListItem ( &quot;off&quot; ) ListItem ( #istream ( 0 ) ) &lt;/in&gt; &lt;out&gt; ListItem ( #ostream ( 1 ) ) ListItem ( &quot;off&quot; ) ListItem ( #buffer ( &quot;x = x2 = x1 = 10\n10\n10\n&quot; ) ) &lt;/out&gt; &lt;/T&gt;
+
+Solution 6:
+&lt;T&gt; &lt;threads&gt; .ThreadCellBag &lt;/threads&gt; &lt;store&gt; 1 |-&gt; 15 2 |-&gt; 0 &lt;/store&gt; &lt;in&gt; ListItem ( #buffer ( &quot;&quot; ) ) ListItem ( &quot;off&quot; ) ListItem ( #istream ( 0 ) ) &lt;/in&gt; &lt;out&gt; ListItem ( #ostream ( 1 ) ) ListItem ( &quot;off&quot; ) ListItem ( #buffer ( &quot;x = 10\nx1 = 5\nx2 = 15\n&quot; ) ) &lt;/out&gt; &lt;/T&gt;
+
+Solution 7:
+&lt;T&gt; &lt;threads&gt; .ThreadCellBag &lt;/threads&gt; &lt;store&gt; 1 |-&gt; 15 2 |-&gt; 0 &lt;/store&gt; &lt;in&gt; ListItem ( #buffer ( &quot;&quot; ) ) ListItem ( &quot;off&quot; ) ListItem ( #istream ( 0 ) ) &lt;/in&gt; &lt;out&gt; ListItem ( #ostream ( 1 ) ) ListItem ( &quot;off&quot; ) ListItem ( #buffer ( &quot;x = 10\nx1 = x2 = 15\n15\n&quot; ) ) &lt;/out&gt; &lt;/T&gt;
+
+Solution 8:
+&lt;T&gt; &lt;threads&gt; .ThreadCellBag &lt;/threads&gt; &lt;store&gt; 1 |-&gt; 15 2 |-&gt; 0 &lt;/store&gt; &lt;in&gt; ListItem ( #buffer ( &quot;&quot; ) ) ListItem ( &quot;off&quot; ) ListItem ( #istream ( 0 ) ) &lt;/in&gt; &lt;out&gt; ListItem ( #ostream ( 1 ) ) ListItem ( &quot;off&quot; ) ListItem ( #buffer ( &quot;x = x1 = 5\n5\nx2 = 15\n&quot; ) ) &lt;/out&gt; &lt;/T&gt;
+
+Solution 9:
+&lt;T&gt; &lt;threads&gt; .ThreadCellBag &lt;/threads&gt; &lt;store&gt; 1 |-&gt; 15 2 |-&gt; 0 &lt;/store&gt; &lt;in&gt; ListItem ( #buffer ( &quot;&quot; ) ) ListItem ( &quot;off&quot; ) ListItem ( #istream ( 0 ) ) &lt;/in&gt; &lt;out&gt; ListItem ( #ostream ( 1 ) ) ListItem ( &quot;off&quot; ) ListItem ( #buffer ( &quot;x = x1 = 5\nx2 = 15\n15\n&quot; ) ) &lt;/out&gt; &lt;/T&gt;
+
+Solution 10:
+&lt;T&gt; &lt;threads&gt; .ThreadCellBag &lt;/threads&gt; &lt;store&gt; 1 |-&gt; 15 2 |-&gt; 0 &lt;/store&gt; &lt;in&gt; ListItem ( #buffer ( &quot;&quot; ) ) ListItem ( &quot;off&quot; ) ListItem ( #istream ( 0 ) ) &lt;/in&gt; &lt;out&gt; ListItem ( #ostream ( 1 ) ) ListItem ( &quot;off&quot; ) ListItem ( #buffer ( &quot;x = x1 = x2 = 15\n15\n15\n&quot; ) ) &lt;/out&gt; &lt;/T&gt;
+
+Solution 11:
+&lt;T&gt; &lt;threads&gt; .ThreadCellBag &lt;/threads&gt; &lt;store&gt; 1 |-&gt; 20 2 |-&gt; 0 &lt;/store&gt; &lt;in&gt; ListItem ( #buffer ( &quot;&quot; ) ) ListItem ( &quot;off&quot; ) ListItem ( #istream ( 0 ) ) &lt;/in&gt; &lt;out&gt; ListItem ( #ostream ( 1 ) ) ListItem ( &quot;off&quot; ) ListItem ( #buffer ( &quot;x = 10\nx1 = 5\nx2 = 20\n&quot; ) ) &lt;/out&gt; &lt;/T&gt;
+
+Solution 12:
+&lt;T&gt; &lt;threads&gt; .ThreadCellBag &lt;/threads&gt; &lt;store&gt; 1 |-&gt; 20 2 |-&gt; 0 &lt;/store&gt; &lt;in&gt; ListItem ( #buffer ( &quot;&quot; ) ) ListItem ( &quot;off&quot; ) ListItem ( #istream ( 0 ) ) &lt;/in&gt; &lt;out&gt; ListItem ( #ostream ( 1 ) ) ListItem ( &quot;off&quot; ) ListItem ( #buffer ( &quot;x = 10\nx1 = x2 = 20\n20\n&quot; ) ) &lt;/out&gt; &lt;/T&gt;
+
+Solution 13:
+&lt;T&gt; &lt;threads&gt; .ThreadCellBag &lt;/threads&gt; &lt;store&gt; 1 |-&gt; 20 2 |-&gt; 0 &lt;/store&gt; &lt;in&gt; ListItem ( #buffer ( &quot;&quot; ) ) ListItem ( &quot;off&quot; ) ListItem ( #istream ( 0 ) ) &lt;/in&gt; &lt;out&gt; ListItem ( #ostream ( 1 ) ) ListItem ( &quot;off&quot; ) ListItem ( #buffer ( &quot;x = x1 = 5\n5\nx2 = 20\n&quot; ) ) &lt;/out&gt; &lt;/T&gt;
+
+Solution 14:
+&lt;T&gt; &lt;threads&gt; .ThreadCellBag &lt;/threads&gt; &lt;store&gt; 1 |-&gt; 20 2 |-&gt; 0 &lt;/store&gt; &lt;in&gt; ListItem ( #buffer ( &quot;&quot; ) ) ListItem ( &quot;off&quot; ) ListItem ( #istream ( 0 ) ) &lt;/in&gt; &lt;out&gt; ListItem ( #ostream ( 1 ) ) ListItem ( &quot;off&quot; ) ListItem ( #buffer ( &quot;x = x1 = 5\nx2 = 20\n20\n&quot; ) ) &lt;/out&gt; &lt;/T&gt;
+
+Solution 15:
+&lt;T&gt; &lt;threads&gt; .ThreadCellBag &lt;/threads&gt; &lt;store&gt; 1 |-&gt; 20 2 |-&gt; 0 &lt;/store&gt; &lt;in&gt; ListItem ( #buffer ( &quot;&quot; ) ) ListItem ( &quot;off&quot; ) ListItem ( #istream ( 0 ) ) &lt;/in&gt; &lt;out&gt; ListItem ( #ostream ( 1 ) ) ListItem ( &quot;off&quot; ) ListItem ( #buffer ( &quot;x = x1 = x2 = 20\n20\n20\n&quot; ) ) &lt;/out&gt; &lt;/T&gt;
+
+Solution 16:
+&lt;T&gt; &lt;threads&gt; .ThreadCellBag &lt;/threads&gt; &lt;store&gt; 1 |-&gt; 5 2 |-&gt; 0 &lt;/store&gt; &lt;in&gt; ListItem ( #buffer ( &quot;&quot; ) ) ListItem ( &quot;off&quot; ) ListItem ( #istream ( 0 ) ) &lt;/in&gt; &lt;out&gt; ListItem ( #ostream ( 1 ) ) ListItem ( &quot;off&quot; ) ListItem ( #buffer ( &quot;x = 10\nx2 = 20\nx1 = 5\n&quot; ) ) &lt;/out&gt; &lt;/T&gt;
+
+Solution 17:
+&lt;T&gt; &lt;threads&gt; .ThreadCellBag &lt;/threads&gt; &lt;store&gt; 1 |-&gt; 5 2 |-&gt; 0 &lt;/store&gt; &lt;in&gt; ListItem ( #buffer ( &quot;&quot; ) ) ListItem ( &quot;off&quot; ) ListItem ( #istream ( 0 ) ) &lt;/in&gt; &lt;out&gt; ListItem ( #ostream ( 1 ) ) ListItem ( &quot;off&quot; ) ListItem ( #buffer ( &quot;x = 10\nx2 = x1 = 5\n5\n&quot; ) ) &lt;/out&gt; &lt;/T&gt;
+
+Solution 18:
+&lt;T&gt; &lt;threads&gt; .ThreadCellBag &lt;/threads&gt; &lt;store&gt; 1 |-&gt; 5 2 |-&gt; 0 &lt;/store&gt; &lt;in&gt; ListItem ( #buffer ( &quot;&quot; ) ) ListItem ( &quot;off&quot; ) ListItem ( #istream ( 0 ) ) &lt;/in&gt; &lt;out&gt; ListItem ( #ostream ( 1 ) ) ListItem ( &quot;off&quot; ) ListItem ( #buffer ( &quot;x = x2 = 20\n20\nx1 = 5\n&quot; ) ) &lt;/out&gt; &lt;/T&gt;
+
+Solution 19:
+&lt;T&gt; &lt;threads&gt; .ThreadCellBag &lt;/threads&gt; &lt;store&gt; 1 |-&gt; 5 2 |-&gt; 0 &lt;/store&gt; &lt;in&gt; ListItem ( #buffer ( &quot;&quot; ) ) ListItem ( &quot;off&quot; ) ListItem ( #istream ( 0 ) ) &lt;/in&gt; &lt;out&gt; ListItem ( #ostream ( 1 ) ) ListItem ( &quot;off&quot; ) ListItem ( #buffer ( &quot;x = x2 = 20\nx1 = 5\n5\n&quot; ) ) &lt;/out&gt; &lt;/T&gt;
+
+Solution 20:
+&lt;T&gt; &lt;threads&gt; .ThreadCellBag &lt;/threads&gt; &lt;store&gt; 1 |-&gt; 5 2 |-&gt; 0 &lt;/store&gt; &lt;in&gt; ListItem ( #buffer ( &quot;&quot; ) ) ListItem ( &quot;off&quot; ) ListItem ( #istream ( 0 ) ) &lt;/in&gt; &lt;out&gt; ListItem ( #ostream ( 1 ) ) ListItem ( &quot;off&quot; ) ListItem ( #buffer ( &quot;x = x2 = x1 = 5\n5\n5\n&quot; ) ) &lt;/out&gt; &lt;/T&gt;</code></pre><p align="right"><a href="plp.html#top">[Go to top]</a></p>
+
+<hr>
+<p><a id="week7"> </a></p>
+<hr>
+
+<h3>Week 7</h3><ul>
+<li>Lecture: <a href="https://profs.info.uaic.ro/~arusoaie.andrei/old/lectures/PLP/2018/week7/lecture6.pdf">Slides</a></li>
+<li>Bibliography: Chapter 4 from the <a href="http://websrv.dthu.edu.vn/attachments/newsevents/content2415/Programming_Languages_-_Principles_and_Paradigms_thereds1106.pdf">BOOK</a></li>
+<li>Lecture demo:</li>
+</ul>
+<pre><code>module IMP-SYNTAX
+  syntax AExp ::= Int // builtin
+                | Id  // builtin
+                | String // builtin
+                | &quot;read&quot; &quot;(&quot; &quot;)&quot;
+                | Id &quot;(&quot; Params &quot;)&quot; [strict(2)]
+                | &quot;++&quot; Id
+                &gt; left:
+                  AExp &quot;*&quot; AExp [left]
+                | AExp &quot;/&quot; AExp [left]
+                &gt; left:
+                  AExp &quot;+&quot; AExp [left, strict]
+                | AExp &quot;-&quot; AExp [left]
+                | &quot;(&quot; AExp &quot;)&quot;  [bracket]
+
+  syntax BExp ::= Bool // builtin
+                | &quot;!&quot; BExp
+                | BExp &quot;&amp;&amp;&quot; BExp [non-assoc]
+                | AExp &quot;&lt;=&quot; AExp [strict]
+                | AExp &quot;&lt;&quot;  AExp
+                | &quot;(&quot; BExp &quot;)&quot; [bracket]
+
+  syntax Block ::= &quot;{&quot; Stmt &quot;}&quot;
+                 | &quot;{&quot; &quot;}&quot;
+
+  syntax Stmt ::= Block
+                | &quot;int&quot; Id &quot;;&quot;
+                | &quot;print&quot; &quot;(&quot; AExp &quot;)&quot; &quot;;&quot; [strict]
+                | Id &quot;=&quot; AExp &quot;;&quot;  [strict(2)]
+                | &quot;if&quot; BExp Block &quot;else&quot; Block [strict(1)]
+                | &quot;while&quot; BExp Block
+                | &quot;return&quot; &quot;;&quot;
+                | &quot;return&quot; AExp &quot;;&quot;  [strict]
+                &gt; Stmt Stmt [right]
+
+  syntax Pgm ::= List{Decl, &quot;;&quot;}
+  syntax Decl ::= FunDecl | VarDecl
+  syntax VarDecl ::= &quot;int&quot; Id
+  syntax FunDecl ::= &quot;function&quot; Id &quot;(&quot; VarDecls &quot;)&quot; Block
+  syntax VarDecls ::= List{VarDecl, &quot;,&quot;}
+  syntax Params ::= List{AExp, &quot;,&quot;}  [strict]
+endmodule
+
+module IMP
+  imports IMP-SYNTAX
+
+  syntax Val ::= Bool | Int | String
+  syntax Vals ::= List{Val, &quot;,&quot;}
+  syntax KResult ::= Val | Vals 
+  syntax AExp ::= Val
+  syntax Params ::= Vals 
+
+  syntax KItem ::= &quot;execute&quot;
+  configuration &lt;k&gt; $PGM:Pgm ~&gt; execute &lt;/k&gt;
+                &lt;env&gt; .Map &lt;/env&gt;
+                &lt;store&gt; .Map &lt;/store&gt;
+                &lt;stack&gt; .List &lt;/stack&gt;
+                &lt;fstack&gt; .List &lt;/fstack&gt;
+                &lt;in stream=&quot;stdin&quot;&gt; .List &lt;/in&gt;
+                &lt;out stream=&quot;stdout&quot;&gt; .List &lt;/out&gt;
+
+  // trigger main 
+  syntax Id ::= &quot;main&quot; [token]
+  rule .Pgm ~&gt; execute =&gt; main(.Params)
+
+  rule I1:Int &lt;= I2:Int =&gt; I1 &lt;=Int I2
+  rule I1:Int + I2:Int =&gt; I1 +Int I2
+
+  rule S1:Stmt S2:Stmt =&gt; S1 ~&gt; S2
+  rule D:Decl ; Ds:Pgm =&gt; D ~&gt; Ds 
+
+  // local declarations
+  rule &lt;k&gt; int X:Id ; =&gt; . ...&lt;/k&gt;
+       &lt;env&gt; M:Map =&gt; M[X &lt;- !L:Int] &lt;/env&gt;
+       &lt;store&gt; M&#39;:Map (.Map =&gt; !L |-&gt; 0) &lt;/store&gt;
+
+  // global declarations
+  rule &lt;k&gt; (int X:Id =&gt; .) ...&lt;/k&gt;
+       &lt;env&gt; Env:Map =&gt; Env[X &lt;- !L:Int] &lt;/env&gt;
+       &lt;store&gt; Mem:Map =&gt; Mem[!L &lt;- 0] &lt;/store&gt;
+
+  // function declaration
+  syntax Lambda ::= &quot;lambda&quot; &quot;(&quot; VarDecls &quot;,&quot; Block &quot;)&quot;
+  rule &lt;k&gt; (function F:Id (VD:VarDecls) B =&gt; .) ...&lt;/k&gt;
+       &lt;env&gt; Env:Map =&gt; Env[F &lt;- !L:Int] &lt;/env&gt;
+       &lt;store&gt; Mem:Map =&gt; Mem[!L &lt;- lambda(VD, B)] &lt;/store&gt;
+
+   rule &lt;k&gt; (X:Id = V:Int ; =&gt; .)  ...&lt;/k&gt;
+        &lt;env&gt;... X |-&gt; L:Int  ...&lt;/env&gt;
+        &lt;store&gt;... L |-&gt; (_ =&gt; V) ...&lt;/store&gt;
+
+   rule &lt;k&gt; (X:Id =&gt; V) ...&lt;/k&gt;
+        &lt;env&gt;... X |-&gt; L:Int ...&lt;/env&gt;
+        &lt;store&gt;... L |-&gt; V:Int ...&lt;/store&gt;
+
+  rule if true  B1:Block else B2:Block =&gt; B1 
+  rule if false B1:Block else B2:Block =&gt; B2 
+
+  // syntax KItem ::= &quot;restoreEnv&quot;
+  // rule &lt;k&gt; { S:Stmt } =&gt; S ~&gt; restoreEnv ...&lt;/k&gt;
+  //      &lt;env&gt; Env &lt;/env&gt;
+  //      &lt;stack&gt; (.List =&gt; ListItem(Env)) ...&lt;/stack&gt;
+
+  // rule &lt;k&gt; (restoreEnv =&gt; .) ...&lt;/k&gt;
+  //      &lt;env&gt; _ =&gt; Env:Map &lt;/env&gt;
+  //      &lt;stack&gt; (ListItem(Env) =&gt; .List) ...&lt;/stack&gt;
+
+  rule { S } =&gt; S 
+  rule { } =&gt; .
+
+  rule while B:BExp { S:Stmt } =&gt;
+       if B { S while B { S } } else { }
+
+  // increment
+  rule &lt;k&gt; ( ++ X:Id =&gt; V +Int 1) ...&lt;/k&gt;
+       &lt;env&gt;... X |-&gt; L ...&lt;/env&gt;
+       &lt;store&gt;... (L:Int |-&gt; (V:Int=&gt; V +Int 1)) ...&lt;/store&gt;
+
+  // read
+  rule &lt;k&gt; (read() =&gt; V) ...&lt;/k&gt;
+       &lt;in&gt; (ListItem(V:Int) =&gt; .List) ...&lt;/in&gt;
+
+  // print
+  syntax Printable ::= Int | String 
+  syntax AExp ::= Printable
+  rule &lt;k&gt; (print(V:Printable); =&gt; .) ...&lt;/k&gt;
+       &lt;out&gt;... (.List =&gt; ListItem(V)) &lt;/out&gt;
+
+  // function call utils
+  syntax KItem ::= &quot;saveEnv&quot;
+  syntax KItem ::= &quot;mkDecl&quot; &quot;(&quot; VarDecls &quot;,&quot; Params &quot;)&quot; 
+
+  // function call
+  rule &lt;k&gt; F:Id ( PA:Params ) =&gt; saveEnv ~&gt; mkDecl(PF, PA) ~&gt; B ...&lt;/k&gt;
+       &lt;env&gt;... F |-&gt; L:Int ...&lt;/env&gt;
+       &lt;store&gt;... L |-&gt; lambda(PF:VarDecls, B:Block) ...&lt;/store&gt;
+
+  rule &lt;k&gt; saveEnv =&gt; . ...&lt;/k&gt;
+       &lt;env&gt; Env:Map &lt;/env&gt;
+       &lt;fstack&gt; (.List =&gt; ListItem(Env)) ...&lt;/fstack&gt;
+
+  rule mkDecl(.VarDecls, .Params) =&gt; .
+  rule &lt;k&gt; mkDecl( (int X:Id, Ds) , (V, Ps) ) =&gt; mkDecl(Ds, Ps) ...&lt;/k&gt;
+       &lt;env&gt; Env:Map =&gt; Env[X &lt;- !L:Int] &lt;/env&gt;
+       &lt;store&gt; Mem:Map =&gt; Mem[!L &lt;- V] &lt;/store&gt;
+
+  rule &lt;k&gt; return V:Int ; =&gt; V ...&lt;/k&gt;
+       &lt;env&gt; _ =&gt; Env &lt;/env&gt;
+       &lt;fstack&gt; (ListItem(Env) =&gt; .List) ...&lt;/fstack&gt;
+
+endmodule</code></pre><p>Program <code>pgm.imp</code> with global variables and recursive functions:</p>
+<pre><code>int a ;
+int b ;
+
+function sum(int n) {
+  if (n &lt;= 0) {
+    return 0;
+  } else {
+    return n + sum(n + (-1));
+  }
+};
+
+function main() {
+  b = 10;
+  a = sum(b);
+  print(a);
+  print(&quot;\n&quot;);
+}</code></pre><p>Result:</p>
+<pre><code>-$ krun pgm.imp 
+55
+&lt;generatedTop&gt; &lt;k&gt; . &lt;/k&gt; &lt;env&gt; b |-&gt; 2 a |-&gt; 1 sum |-&gt; 3 main |-&gt; 4 &lt;/env&gt; &lt;store&gt; 1 |-&gt; 55 2 |-&gt; 10 3 |-&gt; lambda ( ( int n ) , .VarDecls , { if ( n &lt;= 0 ) { return 0 ; } else { return n + sum ( ( n + -1 ) , .VarDecls ) ; } } ) 4 |-&gt; lambda ( .VarDecls , { b = 10 ; a = sum ( b , .VarDecls ) ; print ( a ) ; print ( &quot;\n&quot; ) ; } ) 5 |-&gt; 10 6 |-&gt; 9 7 |-&gt; 8 8 |-&gt; 7 9 |-&gt; 6 10 |-&gt; 5 11 |-&gt; 4 12 |-&gt; 3 13 |-&gt; 2 14 |-&gt; 1 15 |-&gt; 0 &lt;/store&gt; &lt;stack&gt; .List &lt;/stack&gt; &lt;fstack&gt; ListItem ( b |-&gt; 2 a |-&gt; 1 sum |-&gt; 3 main |-&gt; 4 ) &lt;/fstack&gt; &lt;in&gt; ListItem ( #buffer ( &quot;&quot; ) ) ListItem ( &quot;on&quot; ) ListItem ( #istream ( 0 ) ) &lt;/in&gt; &lt;out&gt; ListItem ( #ostream ( 1 ) ) ListItem ( &quot;on&quot; ) ListItem ( #buffer ( &quot;&quot; ) ) &lt;/out&gt; &lt;/generatedTop&gt;</code></pre><p align="right"><a href="plp.html#top">[Go to top]</a></p>
+
+<hr>
+<p><a id="week9"> </a></p>
+<hr>
+
+<h3>Week 9</h3><ul>
+<li>Lecture: <a href="https://profs.info.uaic.ro/~arusoaie.andrei/old/lectures/PLP/2018/week9/lecture8.pdf">Slides</a></li>
+<li>Bibliography: <a href="https://softwarefoundations.cis.upenn.edu/">Software foundations</a></li>
+<li>Lab: choosing a project from <a href="https://profs.info.uaic.ro/~arusoaie.andrei/old/lectures/PLP/2018/projects.html">this list</a>.</li>
+<li>Optional bibliography: <a href="https://www.springer.com/gp/book/9783540208549">Coq&#39;Art</a></li>
+<li>Lecture demo:</li>
+</ul>
+<p>File <code>nat.v</code>:</p>
+<pre><code>(* O   ---&gt;   0 *)
+(* S O ---&gt;   1 *)
+(* S S O ---&gt; 2 *)
+(*               n in Nat *)
+(* -------      --------- *)
+(* O in Nat      S n in Nat *)
+
+Inductive Nat :=
+| O : Nat
+| S : Nat -&gt; Nat.
+
+
+(*               n in Nat *)
+(* -------      --------- *)
+(* O in Nat      S n in Nat *)
+
+Fixpoint add (m n : Nat)
+  : Nat :=
+  match n with
+  | O =&gt; m
+  | S n&#39; =&gt; S (add m n&#39;)
+  end.
+
+Check O.
+Check (S O).
+Check S (S O).
+Check (add (S O) (S O)).
+Eval compute in (add (S O) (S O)).
+
+
+Lemma n_plus_0_is_n :
+  forall n, add n O = n.
+Proof.
+  (* tactics *)
+  intros n0.
+  simpl.
+  reflexivity.
+Qed.
+
+Lemma O_plus_n_is_n :
+  forall n, add O n = n.
+Proof.
+  induction n.
+  - simpl. reflexivity.
+  - simpl. rewrite IHn.
+    reflexivity.
+Qed.
+
+Lemma add_comm:
+  forall m n, add m n = add n m.
+Proof.
+  induction m.
+  - intros.
+    rewrite n_plus_0_is_n.
+    rewrite O_plus_n_is_n.
+    reflexivity.
+  - induction n.
+    -- simpl.
+       rewrite O_plus_n_is_n.
+       reflexivity.
+    -- simpl.
+       rewrite IHn.
+       rewrite &lt;- IHm.
+       simpl.
+       rewrite IHm.
+       reflexivity.
+Qed.</code></pre><p>File <code>exp.v</code>:</p>
+<pre><code>(*
+   Exp ::= Id
+         | Nat
+         | Exp &quot;+&quot; Exp
+         | Exp &quot;*&quot; Exp 
+ *)
+Require Import String.
+Inductive Exp :=
+| id : string -&gt; Exp
+| const : nat -&gt; Exp
+| plus : Exp -&gt; Exp -&gt; Exp
+| times : Exp -&gt; Exp -&gt; Exp.
+
+Check (id &quot;x&quot;).
+Check (const 5).
+Check (plus (id &quot;x&quot;) (const 5)).
+
+(*
+&lt;k&gt; Code: Exp &lt;/k&gt;
+&lt;state&gt; x |-&gt; ??? &lt;/state&gt;
+ *)
+
+Definition state1 (x : string)
+  : nat :=
+  if (string_dec x &quot;x&quot;)
+  then 10
+  else 0.
+
+Eval compute in (state1 &quot;y&quot;).
+
+Fixpoint interpret
+         (e : Exp)
+         (state : string -&gt; nat) : nat :=
+  match e with
+  | const n =&gt; n
+  | id x =&gt; (state x)
+  | plus e1 e2 =&gt; (interpret e1 state) + (interpret e2 state)
+  | times e1 e2 =&gt; (interpret e1 state) * (interpret e2 state)
+  end.
+
+Eval compute in (interpret (id &quot;x&quot;) state1).
+Eval compute in (interpret (const 5) state1).
+Eval compute in (interpret (plus (const 5) (id &quot;x&quot;)) state1).
+
+
+(* Stack machine *)
+Inductive instr :=
+| push_const : nat -&gt; instr
+| push_var : string -&gt; instr
+| add : instr
+| mul : instr.
+
+Require Import List.
+
+Fixpoint run
+         (i : instr)
+         (state : string -&gt; nat)
+         (stack : list nat) : list nat :=
+  match i with
+  | push_const n =&gt; (n :: stack)
+  | push_var x =&gt; (state x) :: stack
+  | add =&gt; match stack with
+           | (n1 :: n2 :: s&#39;) =&gt;
+             (n1 + n2) :: s&#39;
+           | _ =&gt; stack
+           end
+  | mul =&gt; match stack with
+           | (n1 :: n2 :: s&#39;) =&gt;
+             (n1 * n2) :: s&#39;
+           | _ =&gt; stack
+           end
+  end.
+
+Eval compute in run (push_const 4) state1 nil.
+Eval compute in run (push_var &quot;x&quot;) state1 nil.
+Eval compute in run mul state1 (2 :: 3 :: nil).
+
+Fixpoint run_all (l : list instr)
+         (state : string -&gt; nat)
+         (stack : list nat) : list nat :=
+  match l with
+  | nil =&gt; stack
+  | i :: l&#39; =&gt;
+    run_all l&#39; state (run i state stack)
+  end.
+
+Eval compute in
+    run_all
+      (push_const 4 :: push_var &quot;x&quot; :: add :: nil)
+      state1
+      nil.
+
+
+Fixpoint compile (e : Exp) : list instr :=
+  match e with
+  | const n =&gt; (push_const n :: nil)
+  | id x =&gt; (push_var x :: nil)
+  | plus e1 e2 =&gt; (compile e1) ++ (compile e2) ++ (add :: nil)
+  | times e1 e2 =&gt; (compile e1) ++ (compile e2) ++ (mul :: nil)
+  end.
+
+Eval compute in
+    compile (plus (id &quot;x&quot;) (const 5)).
+
+Eval compute in
+    run_all
+      (compile (plus (id &quot;x&quot;) (const 5)))
+      state1 nil.
+
+
+Lemma compiler_correct&#39;:
+  forall e state stack is&#39;,
+    run_all is&#39; state (interpret e state :: stack) =
+    run_all (compile e ++ is&#39;) state stack.
+Proof.
+  induction e; simpl; intros.
+  - reflexivity.
+  - reflexivity.
+  - rewrite app_assoc_reverse.
+    rewrite &lt;- IHe1.
+    rewrite app_assoc_reverse.
+    rewrite &lt;- IHe2.
+    simpl.
+    rewrite PeanoNat.Nat.add_comm.
+    trivial.
+  - rewrite app_assoc_reverse.
+    rewrite &lt;- IHe1.
+    rewrite app_assoc_reverse.
+    rewrite &lt;- IHe2.
+    simpl.
+    rewrite PeanoNat.Nat.mul_comm.
+    trivial.
+Qed. 
+
+Theorem compiler_correct:
+  forall e state,
+    (interpret e state) :: nil =
+    run_all (compile e) state nil.
+Proof.
+  intros.
+  rewrite &lt;- app_nil_r with (l := (compile e)).
+  rewrite &lt;- compiler_correct&#39;.
+  simpl.
+  trivial.
+Qed.
+
+Require Extraction.
+Extraction Language OCaml.
+Recursive Extraction compile.</code></pre><p align="right"><a href="plp.html#top">[Go to top]</a></p>
+
+
+
+
+
+<hr>
+<p><a id="week10"> </a></p>
+<hr>
+
+<h3>Week 10</h3><ul>
+<li>Lecture: <a href="https://profs.info.uaic.ro/~arusoaie.andrei/old/lectures/PLP/2018/week10/lecture9.pdf">Slides</a></li>
+<li>Bibliography: <a href="http://fsl.cs.illinois.edu/images/c/cf/CS422-Spring-2015-02b-BigStep.pdf">Big-Step SOS</a></li>
+<li>Optional bibliography: <a href="http://fsl.cs.illinois.edu/index.php/CS422_-_Programming_Language_Design_(Spring_2015)">CS422 - UIUC</a></li>
+<li>Lab: work on your project.</li>
+<li>Lecture demo:</li>
+</ul>
+<pre><code>mod IMP-SYNTAX is
+    protecting INT .
+    protecting QID .
+
+    sort AExp .
+        subsorts Int Qid &lt; AExp .
+        op _+_ : AExp AExp -&gt; AExp [ditto] .
+        op _/_ : AExp AExp -&gt; AExp .
+
+        sort BExp .
+        subsorts Bool &lt; BExp .
+        op !_ : BExp -&gt; BExp .
+        op _&amp;&amp;_ : BExp BExp -&gt; BExp .
+        op _&lt;=_ : AExp AExp -&gt; BExp [ditto] .
+
+        sort Block .
+        op {} : -&gt; Block .
+    op {_} : Stmt -&gt; Block .
+
+        sort Stmt .
+        op _:=_; : Qid AExp -&gt; Stmt .
+        op if_then_else_ : BExp Block Block -&gt; Stmt .
+        op while__ : BExp Block -&gt; Stmt .
+        op __ : Stmt Stmt -&gt; Stmt [assoc prec 100] .
+endm
+
+mod IMP is
+        protecting IMP-SYNTAX .
+
+        sort State .
+        op _|-&gt;_ : Qid Int -&gt; State .
+    op .State : -&gt; State .
+        op __ : State State -&gt; State [comm assoc prec 101 id: .State] .
+
+    vars X : Qid .
+    vars Sigma : State .
+    vars I I&#39; : Int .
+
+        *** lookup
+        op _(_) : State Qid -&gt; Int .
+        eq (X |-&gt; I Sigma)(X) = I .
+
+        *** update
+        op _[_/_] : State Int Qid -&gt; State .
+        eq (X |-&gt; I&#39; Sigma)[ I / X ] = (X |-&gt; I Sigma) .
+
+        *********************
+    *** Big-Step SOS  ***
+    *********************
+
+        sort Configuration .
+        op &lt;_,_&gt; : AExp State -&gt; Configuration .
+        op &lt;_&gt; : Int -&gt; Configuration .
+        op &lt;_,_&gt; : BExp State -&gt; Configuration .
+        op &lt;_&gt; : Bool -&gt; Configuration .
+        op &lt;_,_&gt; : Stmt State -&gt; Configuration .
+        op &lt;_,_&gt; : Block State -&gt; Configuration .
+    op &lt;_&gt; : State -&gt; Configuration .
+
+        *** Big-step INT
+        rl &lt; I , Sigma &gt; =&gt; &lt; I &gt; .
+
+        *** Big-step LOOKUP
+        rl &lt; X , Sigma &gt; =&gt; &lt; Sigma(X) &gt; .
+
+        *** Big-step ADD
+    vars A1 A2 : AExp .
+    vars I1 I2 : Int .
+        crl &lt; A1 + A2 , Sigma &gt; =&gt; &lt; I1 + I2 &gt;
+          if &lt; A1 , Sigma &gt; =&gt; &lt; I1 &gt; /\
+          &lt; A2 , Sigma &gt; =&gt; &lt; I2 &gt; .
+
+        *** Big-step DIV
+        crl &lt; A1 / A2 , Sigma &gt; =&gt; &lt; I1 quo I2 &gt;
+          if &lt; A1 , Sigma &gt; =&gt; &lt; I1 &gt; /\
+          &lt; A2 , Sigma &gt; =&gt; &lt; I2 &gt; /\
+              I2 =/= 0 .
+
+        *** Big-step BOOL
+    var B : Bool .
+        rl &lt; B , Sigma &gt; =&gt; &lt; B &gt; .
+
+    *** Big-step LEQ
+        crl &lt; A1 &lt;= A2 , Sigma &gt; =&gt; &lt; I1 &lt;= I2 &gt;
+          if &lt; A1 , Sigma &gt; =&gt; &lt; I1 &gt; /\
+          &lt; A2 , Sigma &gt; =&gt; &lt; I2 &gt; .
+
+        *** Big-step NOT
+    var BE : BExp .
+        crl &lt; ! BE , Sigma &gt; =&gt; &lt; true &gt;
+          if &lt; BE , Sigma &gt; =&gt; &lt; false &gt; .
+
+        crl &lt; ! BE , Sigma &gt; =&gt; &lt; false &gt;
+          if &lt; BE , Sigma &gt; =&gt; &lt; true &gt; .
+
+        *** Big-step AND
+    vars B1 B2 : BExp .
+        crl &lt; B1 &amp;&amp; B2 , Sigma &gt; =&gt; &lt; B &gt;
+          if &lt; B1 , Sigma &gt; =&gt; &lt; true &gt; /\
+             &lt; B2 , Sigma &gt; =&gt; &lt; B &gt; .
+
+        crl &lt; B1 &amp;&amp; B2 , Sigma &gt; =&gt; &lt; false &gt;
+          if &lt; B1 , Sigma &gt; =&gt; &lt; false &gt; .
+
+        *** Big-step Block
+    vars Sigma&#39; Sigma&#39;&#39; : State .
+    var S : Stmt .
+        rl &lt;  { } , Sigma &gt; =&gt; &lt; Sigma &gt; .
+        crl &lt; { S } , Sigma &gt; =&gt; &lt; Sigma&#39; &gt;
+          if &lt; S , Sigma &gt; =&gt; &lt; Sigma&#39; &gt; .
+
+    *** Big-step assignment
+    var A : AExp .
+    var V : Int .
+***    var X : Qid .
+        crl &lt; X := A ; , Sigma &gt; =&gt; &lt; Sigma [V / X] &gt;
+          if &lt; A , Sigma &gt; =&gt; &lt; V &gt; .
+
+      *** Big-step SEQ
+    vars S1 S2 : Stmt .
+        crl &lt; S1 S2 , Sigma &gt; =&gt; &lt; Sigma&#39;&#39; &gt;
+          if &lt; S1 , Sigma &gt; =&gt; &lt; Sigma&#39; &gt; /\
+              &lt; S2 , Sigma&#39; &gt; =&gt; &lt; Sigma&#39;&#39; &gt; .
+
+        *** Big-step IF
+    vars BL1 BL2 : Block .
+        crl &lt; if B1 then BL1  else BL2 , Sigma &gt; =&gt; &lt; Sigma&#39; &gt;
+            if &lt; B1 , Sigma &gt; =&gt; &lt; true &gt; /\
+               &lt; BL1 , Sigma &gt; =&gt; &lt; Sigma&#39; &gt; .
+
+            *** Big-step WHILE
+        crl &lt; while B1 BL1 , Sigma &gt; =&gt; &lt; Sigma &gt;
+          if &lt; B1 , Sigma &gt; =&gt; &lt; false &gt; .
+
+        crl &lt; while B1 { S1 } , Sigma &gt; =&gt; &lt; Sigma&#39; &gt;
+          if &lt; B1 , Sigma &gt; =&gt; &lt; true &gt; /\
+             &lt; S1 while B1 { S1 } , Sigma &gt; =&gt; &lt; Sigma&#39; &gt; .
+
+endm
+
+parse in IMP : &#39;a .
+parse in IMP : 3 .
+parse in IMP : &#39;a + 3 .
+parse in IMP : &#39;a / 3 .
+
+parse in IMP : true .
+parse in IMP : false .
+parse in IMP : &#39;i &lt;= 3 .
+parse in IMP : &#39;i &lt;= 3 &amp;&amp; false .
+
+parse in IMP : { } .
+parse in IMP : { &#39;n := 4 ; } .
+parse in IMP : if (&#39;i &lt;= &#39;n) then { &#39;i := &#39;i + 1 ; } else { } .
+parse in IMP : if (&#39;i &lt;= &#39;n) then { &#39;i := &#39;i + 1 ; &#39;n := &#39;n + (-1) ; } else { } .
+
+parse in IMP : &#39;i |-&gt; 10 &#39;n |-&gt; 1203 .
+reduce in IMP : (&#39;i |-&gt; 10 &#39;n |-&gt; 1203)(&#39;i) .
+reduce in IMP : (&#39;i |-&gt; 10 &#39;n |-&gt; 1203)(&#39;j) .
+
+reduce in IMP : (&#39;i |-&gt; 10 &#39;n |-&gt; 1203)[2343 / &#39;i] .
+
+rewrite in IMP : &lt; 340, &#39;n |-&gt; 10 &gt; .
+rewrite in IMP : &lt; &#39;n, &#39;n |-&gt; 10 &gt; .
+rewrite in IMP : &lt; &#39;i, &#39;n |-&gt; 10 &gt; .
+
+
+rewrite in IMP : &lt; 340 + &#39;n , &#39;n |-&gt; 10 &gt; .
+
+rewrite in IMP : &lt; 340 / &#39;n , &#39;n |-&gt; 10 &gt; .
+rewrite in IMP : &lt; 340 / &#39;j , &#39;n |-&gt; 10  &#39;j |-&gt; 0 &gt; .
+
+rewrite in IMP : &lt; true , &#39;n |-&gt; 10 &gt; .
+rewrite in IMP : &lt; false , &#39;n |-&gt; 10 &gt; .
+
+rewrite in IMP : &lt; &#39;n &lt;= &#39;n , &#39;n |-&gt; 10 &gt; .
+rewrite in IMP : &lt; 11 &lt;= &#39;n , &#39;n |-&gt; 10 &gt; .
+
+rewrite in IMP : &lt; ! (&#39;n &lt;= &#39;n) , &#39;n |-&gt; 10 &gt; .
+rewrite in IMP : &lt; ! (11 &lt;= &#39;n) , &#39;n |-&gt; 10 &gt; .
+
+rewrite in IMP : &lt; true &amp;&amp; (&#39;n &lt;= &#39;n) , &#39;n |-&gt; 10 &gt; .
+rewrite in IMP : &lt; true &amp;&amp; (11 &lt;= &#39;n) , &#39;n |-&gt; 10 &gt; .
+rewrite in IMP : &lt; false &amp;&amp; (&#39;n &lt;= &#39;n) , &#39;n |-&gt; 10 &gt; .
+
+rewrite in IMP : &lt; { } , &#39;n |-&gt; 10 &gt; .
+rewrite in IMP : &lt; &#39;n := &#39;n + 1 ; , &#39;n |-&gt; 10 &gt; .
+rewrite in IMP : &lt; &#39;n := &#39;n + 1 ; &#39;n := &#39;n + 1 ; , &#39;n |-&gt; 10 &gt; .
+
+rewrite in IMP : &lt; if (&#39;i &lt;= &#39;n) then { &#39;sum := &#39;sum + &#39;i ; &#39;i := &#39;i + 1 ; } else { }  , &#39;i |-&gt; 0 &#39;sum |-&gt; 0 &#39;n |-&gt; 10 &gt; .
+rewrite in IMP : &lt; if !(&#39;i &lt;= &#39;n) then { &#39;sum := &#39;sum + &#39;i ; &#39;i := &#39;i + 1 ; } else { }  , &#39;i |-&gt; 0 &#39;sum |-&gt; 0 &#39;n |-&gt; 10 &gt; .
+rewrite in IMP : &lt; while (&#39;i &lt;= &#39;n) { &#39;sum := &#39;sum + &#39;i ; &#39;i := &#39;i + 1 ; }  , &#39;i |-&gt; 0 &#39;sum |-&gt; 0 &#39;n |-&gt; 10 &gt; .</code></pre><p align="right"><a href="plp.html#top">[Go to top]</a></p>
+
+
+
+<hr>
+<p><a id="week11"> </a></p>
+<hr>
+
+<h3>Week 11</h3><ul>
+<li>Lecture: <a href="https://profs.info.uaic.ro/~arusoaie.andrei/old/lectures/PLP/2018/week11/lecture10.pdf">Slides</a></li>
+<li>Bibliography: <a href="http://fsl.cs.illinois.edu/images/6/65/CS422-Spring-2015-02c-SmallStep.pdf">Small-Step SOS</a></li>
+<li>Optional bibliography: <a href="http://fsl.cs.illinois.edu/index.php/CS422_-_Programming_Language_Design_(Spring_2015)">CS422 - UIUC</a></li>
+<li>Lab: work on your project.</li>
+<li>Lecture demo:</li>
+</ul>
+<pre><code>mod IMP-SYNTAX is
+    protecting INT .
+    protecting QID .
+
+    sort AExp .
+        subsorts Int Qid &lt; AExp .
+        op _+_ : AExp AExp -&gt; AExp [ditto] .
+        op _/_ : AExp AExp -&gt; AExp .
+
+        sort BExp .
+        subsorts Bool &lt; BExp .
+        op !_ : BExp -&gt; BExp .
+        op _&amp;&amp;_ : BExp BExp -&gt; BExp .
+        op _&lt;=_ : AExp AExp -&gt; BExp [ditto] .
+
+        sort Block .
+        op {} : -&gt; Block .
+    op {_} : Stmt -&gt; Block .
+
+        sort Stmt .
+    subsort Block &lt; Stmt .
+        op _:=_; : Qid AExp -&gt; Stmt .
+        op if_then_else_ : BExp Block Block -&gt; Stmt .
+        op while__ : BExp Block -&gt; Stmt .
+        op __ : Stmt Stmt -&gt; Stmt [assoc prec 100] .
+endm
+
+mod IMP is
+        protecting IMP-SYNTAX .
+
+        sort State .
+        op _|-&gt;_ : Qid Int -&gt; State .
+    op .State : -&gt; State .
+        op __ : State State -&gt; State [comm assoc prec 101 id: .State] .
+
+    vars X : Qid .
+    vars Sigma : State .
+    vars I I&#39; : Int .
+
+        *** lookup
+    op undef : -&gt; Int .
+        op _(_) : State Qid -&gt; Int .
+        eq (X |-&gt; I Sigma)(X) = I .
+    eq Sigma(X) = undef [owise] . 
+
+        *** update
+        op _[_/_] : State Int Qid -&gt; State .
+        eq (X |-&gt; I&#39; Sigma)[ I / X ] = (X |-&gt; I Sigma) .
+
+        ***********************
+    *** Small-Step SOS  ***
+    ***********************
+
+    sort ExtendedConfiguration .
+        sort Configuration .
+    subsort Configuration &lt; ExtendedConfiguration .
+        op &lt;_,_&gt; : AExp State -&gt; Configuration .
+        op &lt;_,_&gt; : BExp State -&gt; Configuration .
+        op &lt;_,_&gt; : Stmt State -&gt; Configuration .
+        op &lt;_,_&gt; : Block State -&gt; Configuration .
+
+    op *_ : Configuration -&gt; ExtendedConfiguration .
+    op o_ : Configuration -&gt; ExtendedConfiguration .
+
+    vars C C&#39; : Configuration .
+    crl * C =&gt; * C&#39; if o C =&gt; C&#39; .
+
+        *** Small-step LOOKUP
+        crl o &lt; X , Sigma &gt; =&gt; &lt; Sigma(X) , Sigma &gt;
+      if Sigma(X) =/= undef .
+
+    vars A1 A2 A1&#39; A2&#39; A A&#39; : AExp .
+    vars I1 I2 : Int .
+
+    *** Small-step ADD
+    crl o &lt; A1 + A2 , Sigma &gt; =&gt; &lt; A1&#39; + A2 , Sigma &gt;
+      if o &lt; A1 , Sigma &gt; =&gt; &lt; A1&#39; , Sigma &gt; .
+    crl o &lt; A1 + A2 , Sigma &gt; =&gt; &lt; A1 + A2&#39; , Sigma &gt;
+      if o &lt; A2 , Sigma &gt; =&gt; &lt; A2&#39; , Sigma &gt; .
+    rl o &lt; I1 + I2 , Sigma &gt; =&gt; &lt; I1 + I2 , Sigma &gt; .
+
+    *** Small-step DIV
+    crl o &lt; A1 / A2 , Sigma &gt; =&gt; &lt; A1&#39; / A2 , Sigma &gt;
+      if o &lt; A1 , Sigma &gt; =&gt; &lt; A1&#39; , Sigma &gt; .
+    crl o &lt; A1 / A2 , Sigma &gt; =&gt; &lt; A1 / A2&#39; , Sigma &gt;
+      if o &lt; A2 , Sigma &gt; =&gt; &lt; A2&#39; , Sigma &gt; .
+    crl o &lt; I1 / I2 , Sigma &gt; =&gt; &lt; I1 quo I2 , Sigma &gt;
+      if I2 =/= 0 .
+
+    *** Small-step LEQ
+    crl o &lt; A1 &lt;= A2 , Sigma &gt; =&gt; &lt; A1&#39; &lt;= A2 , Sigma &gt;
+      if o &lt; A1 , Sigma &gt; =&gt; &lt; A1&#39; , Sigma &gt; .
+    crl o &lt; I1 &lt;= A2 , Sigma &gt; =&gt; &lt; I1 &lt;= A2&#39; , Sigma &gt;
+      if o &lt; A2 , Sigma &gt; =&gt; &lt; A2&#39; , Sigma &gt; .
+    rl o &lt; I1 &lt;= I2 , Sigma &gt; =&gt; &lt; I1 &lt;= I2 , Sigma &gt; .
+
+    vars B B&#39; B1 B2 B1&#39; : BExp .
+
+    *** Small-step NOT
+    crl o &lt; ! B , Sigma &gt; =&gt; &lt; ! B&#39;, Sigma &gt;
+      if o &lt; B , Sigma &gt; =&gt; &lt; B&#39; , Sigma &gt; .
+    rl o &lt; ! true , Sigma &gt; =&gt; &lt; false , Sigma &gt; . 
+    rl o &lt; ! false , Sigma &gt; =&gt; &lt; true , Sigma &gt; .
+
+    *** Small-step AND
+    crl o &lt; B1 &amp;&amp; B2 , Sigma &gt; =&gt; &lt; B1&#39; &amp;&amp; B2 , Sigma &gt;
+      if o &lt; B1 , Sigma &gt; =&gt; &lt; B1&#39; , Sigma &gt; .
+    rl o &lt; false &amp;&amp; B2 , Sigma &gt; =&gt; &lt; false , Sigma &gt; .
+    rl o &lt; true &amp;&amp; B2 , Sigma &gt; =&gt; &lt; B2 , Sigma &gt; .
+
+    vars S S&#39; S1 S2 S1&#39; : Stmt . 
+
+    *** Small-step Block
+    rl o &lt; { S } , Sigma &gt; =&gt; &lt; S , Sigma &gt; .
+
+    *** Small-step assignment
+    crl o &lt; X := A1 ; , Sigma &gt; =&gt; &lt; X := A1&#39; ; , Sigma &gt;
+      if o &lt; A1 , Sigma &gt; =&gt; &lt; A1&#39; , Sigma &gt; .
+    crl o &lt; X := I1 ; , Sigma &gt; =&gt; &lt; { }, Sigma[I1 / X] &gt; 
+      if Sigma(X) =/= undef .
+
+    var Sigma&#39; : State . 
+    *** Small-step seq
+    crl o &lt; S1 S2 , Sigma &gt; =&gt; &lt; S1&#39; S2 , Sigma&#39; &gt;
+      if o &lt; S1, Sigma &gt; =&gt; &lt; S1&#39; , Sigma&#39; &gt; .
+    rl o &lt; { } S2, Sigma &gt; =&gt; &lt; S2 , Sigma &gt; .
+
+    *** Small-step if
+    crl o &lt; if B then S1 else S2 , Sigma &gt; =&gt; &lt; if B&#39; then S1 else S2 , Sigma &gt;
+          if o &lt; B , Sigma &gt; =&gt; &lt; B&#39; , Sigma &gt; .
+    rl o &lt; if true then S1 else S2 , Sigma &gt; =&gt; &lt; S1 , Sigma &gt; .
+    rl o &lt; if false then S1 else S2 , Sigma &gt; =&gt; &lt; S2 , Sigma &gt; .
+
+    *** Small-step while
+    rl o &lt; while B S , Sigma &gt; =&gt; &lt; if B then { S while B S } else  { } , Sigma &gt; .
+endm
+
+mod TEST is
+    protecting IMP .
+
+    op SUM : -&gt; Configuration .
+    eq SUM = &lt; while (&#39;i &lt;= &#39;n) { &#39;sum := &#39;sum + &#39;i ; &#39;i := &#39;i + 1 ; }  , &#39;i |-&gt; 0 &#39;sum |-&gt; 0 &#39;n |-&gt; 1000 &gt; .
+endm
+
+*** rewrite in IMP : &lt; &#39;n , &#39;n |-&gt; 10 &#39;j |-&gt; 100 &gt; .
+*** rewrite in IMP : * &lt; &#39;n / &#39;n , &#39;n |-&gt; 10 &#39;j |-&gt; 100 &gt; .
+*** rewrite in IMP : * &lt; &#39;n / &#39;n , &#39;n |-&gt; 0 &#39;j |-&gt; 100 &gt; .
+
+*** rewrite in IMP : * &lt; &#39;k , &#39;n |-&gt; 10 &#39;j |-&gt; 100 &gt; .
+*** rewrite in IMP : * &lt; &#39;n + &#39;j &lt;= &#39;n , &#39;n |-&gt; 0 &#39;j |-&gt; 100 &gt; .
+*** rewrite in IMP : * &lt; &#39;n &lt;= &#39;j + &#39;n , &#39;n |-&gt; 0 &#39;j |-&gt; 100 &gt; .
+*** rewrite in IMP : * &lt; ! (&#39;n + &#39;j &lt;= &#39;n) , &#39;n |-&gt; 0 &#39;j |-&gt; 100 &gt; .
+*** rewrite in IMP : * &lt; ! (&#39;n &lt;= &#39;j + &#39;n) &amp;&amp; &#39;n &lt;= &#39;n , &#39;n |-&gt; 0 &#39;j |-&gt; 100 &gt; .
+*** rewrite in IMP : * &lt; (&#39;n &lt;= &#39;j + &#39;n) &amp;&amp; &#39;n &lt;= &#39;n , &#39;n |-&gt; 0 &#39;j |-&gt; 100 &gt; .
+
+*** rewrite in IMP : * &lt; &#39;n := &#39;n + &#39;n + 1 ; , &#39;n |-&gt; 0 &#39;j |-&gt; 100 &gt; .
+*** rewrite in IMP : * &lt; { &#39;n := &#39;n + &#39;n + 1 ; } , &#39;n |-&gt; 0 &#39;j |-&gt; 100 &gt; .
+
+*** rewrite in IMP : * &lt; if !(&#39;n &lt;= &#39;n)
+***                       then { &#39;n := &#39;n + &#39;j ; }
+***                       else { }  ,
+***                    &#39;n |-&gt; 0 &#39;j |-&gt; 100 &gt; .
+
+*** rewrite in TEST : * SUM .
+
+
+*** &lt; {},&#39;i |-&gt; 11 &#39;n |-&gt; 10 &#39;sum |-&gt; 55 &gt;
+search in TEST : * SUM =&gt;! * &lt; { } , &#39;i |-&gt; I:Int &#39;sum |-&gt; S:Int Rest:State &gt; such that S:Int &gt; 1024  .
+
+q</code></pre><p align="right"><a href="plp.html#top">[Go to top]</a></p>
+
+
+<hr>
+<p><a id="week12"> </a></p>
+<hr>
+
+<h3>Week 12</h3><ul>
+<li>Lecture: <a href="https://profs.info.uaic.ro/~arusoaie.andrei/old/lectures/PLP/2018/week12/lecture11.pdf">Slides</a></li>
+<li>Bibliography: Chapter 10 from the <a href="http://websrv.dthu.edu.vn/attachments/newsevents/content2415/Programming_Languages_-_Principles_and_Paradigms_thereds1106.pdf">book</a></li>
+<li>Optional bibliography: <a href="http://fsl.cs.illinois.edu/index.php/CS422_-_Programming_Language_Design_(Spring_2015)">KOOL</a></li>
+<li>Lab: intermediate project evaluation.</li>
+</ul>
+<p align="right"><a href="plp.html#top">[Go to top]</a></p>
+
+
+<hr>
+<p><a id="week13"> </a></p>
+<hr>
+
+<h3>Week 13</h3><ul>
+<li>Lecture: <a href="https://profs.info.uaic.ro/~arusoaie.andrei/old/lectures/PLP/2018/week13/lecture11.pdf">Slides</a></li>
+<li>Bibliography: Chapter 11 from the <a href="http://websrv.dthu.edu.vn/attachments/newsevents/content2415/Programming_Languages_-_Principles_and_Paradigms_thereds1106.pdf">book</a></li>
+<li>Lab: first project evaluation week. </li>
+</ul>
+<p align="right"><a href="plp.html#top">[Go to top]</a></p>
+
+<hr>
+<p><a id="week14"> </a></p>
+<hr>
+
+<h3>Week 14</h3><ul>
+<li>Lecture: <a href="https://profs.info.uaic.ro/~arusoaie.andrei/old/lectures/PLP/2018/week14/lecture12.pdf">Slides</a></li>
+<li>Bibliography: Chapter 12 from the <a href="http://websrv.dthu.edu.vn/attachments/newsevents/content2415/Programming_Languages_-_Principles_and_Paradigms_thereds1106.pdf">book</a></li>
+<li>Optional bibliography: <a href="https://people.mpi-sws.org/~dg/teaching/lis2014/modules/lp-fp-07.pdf">https://people.mpi-sws.org/~dg/teaching/lis2014/modules/lp-fp-07.pdf</a></li>
+<li>Lab: last project evaluation week. </li>
+<li>Lecture demo:</li>
+</ul>
+<pre><code>nat(0).
+nat(s(N)) :- nat(N).
+
+even(0).
+even(s(s(N))) :- even(N).
+even(s(s(N))) :- even(s(s(s(s(N))))).
+
+meat(pork, 1010).
+meat(stake, 1500).
+fish(tuna, 70).
+fish(salmon, 71).
+main_dish(M,K) :- meat(M,K); fish(M,K).
+
+starter(salad, 50).
+starter(soup, 90).
+desert(cake, 600).
+desert(pie, 160).
+desert(icecream, 299).
+
+meal(S,MD,D) :- starter(S,KS), main_dish(MD, MDK), desert(D, DK).
+light_meal(S,MD,D) :- starter(S,KS), main_dish(MD, MDK), desert(D, DK), KS + MDK + DK &lt; 900.
+
+
+edge(1,2).
+edge(1,3).
+edge(2,4).
+edge(3,5).
+edge(4,5).
+path(A,B,[]) :- edge(A,B).
+path(A,B,[C|Path]) :- edge(A,C),path(C,B,Path).</code></pre><p align="right"><a href="plp.html#top">[Go to top]</a></p>
+
+
+<hr>
+<p><a id="Evaluation"> </a></p>
+<h2>Evaluation</h2><h3>General aspects</h3><ul>
+<li>No of credits allocated: 4.</li>
+<li><strong>No final exam.</strong> This implies that you <strong>cannot</strong> repeat any test or
+project submission during the 2 weeks period dedicated to evaluation at the
+end of the semester.</li>
+<li>The evaluation will be done <strong>only</strong> during the semester.</li>
+</ul>
+<h3>Grading</h3><p>In order to promote you need at least <strong>50 points</strong>. You can obtain
+them as follows:</p>
+<ol>
+<li><strong>Lab test</strong> (<strong>Midterm</strong>) - covers the <em>1st half of the semester</em><ul>
+<li>You can obtain a maximum of 50 points.</li>
+<li>An open-book test in front of the computer where you will be
+asked to define the semantics of a few programming language
+concepts studied in the first half of the semester.</li>
+<li>You will be evaluated <em>in place</em>, right at the end of the exam.</li>
+<li><strong>Due</strong>: week 7.</li>
+</ul>
+</li>
+<li><strong>Semester project</strong> - covers the <em>2nd half of the semester</em><ul>
+<li>You can obtain a maximum of 50 points.</li>
+<li>You will be asked to implement a semester project which must be
+discussed with your lab professor.</li>
+<li>The project will be evaluated in two stages:<ul>
+<li>first stage: 20 points, <strong>due</strong>: December 20, 2017</li>
+<li>second stage: 30 points, <strong>due</strong>: January 17, 2018</li>
+</ul>
+</li>
+<li>Once a stage is completed you will not be able to obtain points
+for material belonging to that stage!</li>
+<li>The points obtained in the first stage are considered only if
+you get points in the seconds stage!</li>
+<li>You cannot present the same thing multiple times.</li>
+</ul>
+</li>
+</ol>
+<p align="right"><a href="plp.html#top">[Go to top]</a></p>
+
+
+<hr>
+<p><a id="Contents"> </a></p>
+<h2>Contents</h2><h3>1. About programming languages. Introduction. Main programming paradigms.</h3><ul>
+<li>Lab: <ul>
+<li>Introduction in the K framework. Installation and <code>Hello
+world!</code> in K.</li>
+<li>Bibliography: chapter 13 from the <a href="http://websrv.dthu.edu.vn/attachments/newsevents/content2415/Programming_Languages_-_Principles_and_Paradigms_thereds1106.pdf">BOOK</a>.</li>
+<li>Using the K definitions compiler: <code>kompile</code>. </li>
+<li>Optional bibliography: <a href="http://fsl.cs.illinois.edu/index.php/Executing_Formal_Semantics_with_the_K_Tool">Executing Formal Semantics with the K Tool</a></li>
+</ul>
+</li>
+</ul>
+<h3>2. Defining programming languages: syntax.</h3><ul>
+<li>Bibliography: sections 2.1-2.4 from the <a href="http://websrv.dthu.edu.vn/attachments/newsevents/content2415/Programming_Languages_-_Principles_and_Paradigms_thereds1106.pdf">BOOK</a>.</li>
+<li>Lab: <ul>
+<li>Defining syntax in the K framework of a simple imperative
+language called <em>IMP</em>: simple arithmetic and boolean expressions, statements:
+assignments, decisionals, loops, blocks, and programs.</li>
+<li>Using the <code>kast</code> parser.</li>
+<li>References: lesson 1 from <a href="https://github.com/kframework/k/tree/master/k-distribution/tutorial/1_k/2_imp/">IMP</a>.</li>
+</ul>
+</li>
+</ul>
+<h3>3. Defining programming languages: semantics.</h3><ul>
+<li>Bibliography: section 2.5 and chapter 6 from the <a href="http://websrv.dthu.edu.vn/attachments/newsevents/content2415/Programming_Languages_-_Principles_and_Paradigms_thereds1106.pdf">BOOK</a>.</li>
+<li>Lab: <ul>
+<li>Defining configurations in the K framework: <em>IMP</em></li>
+<li>Defining semantics in the K framework of simple language
+statements: assignments, decisionals, loops, blocks for <em>IMP</em>.</li>
+<li>Use <code>strict</code> to enable heating/cooling rules.</li>
+<li>Using the <code>krun</code> tool for executing semantics.</li>
+<li>References: lessons 2-5 from <a href="https://github.com/kframework/k/tree/master/k-distribution/tutorial/1_k/2_imp/">IMP</a>.</li>
+</ul>
+</li>
+</ul>
+<h3>4. Side-effects. I/O. Local variables.</h3><ul>
+<li>Bibliography: Section 3 from the <a href="http://fsl.cs.illinois.edu/FSL/papers/2017/rosu-2017-marktoberdorf/rosu-2017-marktoberdorf-public.pdf">Marktoberdorf tutorial</a>.</li>
+<li>Lab: <ul>
+<li>Enriching the syntax of <em>IMP</em> with: strings, variable increment, read, and print.</li>
+<li>Defining the semantics of the above mentioned syntax constructs by
+considering side-effects, local variables, local variables in
+nested blocks.</li>
+<li>Adding semantics for I/O using the K framework.</li>
+<li>References: lesson 1-3 from <a href="https://github.com/kframework/k/tree/master/k-distribution/tutorial/1_k/4_imp%2B%2B">IMP++</a>.</li>
+</ul>
+</li>
+<li>Optional bibliography: <a href="http://fsl.cs.illinois.edu/index.php/Executing_Formal_Semantics_with_the_K_Tool">Executing Formal Semantics with the K Tool</a>.</li>
+</ul>
+<h3>5. Non-determinism. Dynamic threads. Abrupt termination.</h3><ul>
+<li>Bibliography: Section 8.4.7 from the <a href="http://websrv.dthu.edu.vn/attachments/newsevents/content2415/Programming_Languages_-_Principles_and_Paradigms_thereds1106.pdf">BOOK</a>.</li>
+<li>Lab: <ul>
+<li>Enriching the syntax of <em>IMP</em> with: spawn thread, halt, join
+thread, auxiliary operations for environment recovery.</li>
+<li>Defining the semantics of the above mentioned syntax constructs. </li>
+<li>Using the special options of <code>kompile</code> for exploring
+non-determinism: <code>--transition</code></li>
+<li>References: lessons 4-8 from <a href="https://github.com/kframework/k/tree/master/k-distribution/tutorial/1_k/4_imp%2B%2B">IMP++</a>.</li>
+</ul>
+</li>
+<li>Optional bibliography: <a href="http://fsl.cs.illinois.edu/index.php/Executing_Formal_Semantics_with_the_K_Tool">Executing Formal Semantics with the K Tool</a>.</li>
+</ul>
+<h3>6. Functions. Call-by-value. Call-by-reference. Names and the environment.</h3><ul>
+<li>Bibliography: Chapter 4 from the <a href="http://websrv.dthu.edu.vn/attachments/newsevents/content2415/Programming_Languages_-_Principles_and_Paradigms_thereds1106.pdf">BOOK</a>.</li>
+<li>Lab:<ul>
+<li>Adding syntax and semantics for functions: call-by-value
+vs. call-by-reference.</li>
+</ul>
+</li>
+</ul>
+<h3>7. Typed vs. untyped languages. Case study: SIMPLE.</h3><ul>
+<li>Bibliography: <a href="http://fsl.cs.illinois.edu/index.php/K_Overview_and_SIMPLE_Case_Study">SIMPLE</a></li>
+<li>Lab:<ul>
+<li>Add multi-dimensional arrays and exceptions in <em>IMP</em>.</li>
+<li>Prepare for the semester project.</li>
+</ul>
+</li>
+</ul>
+<h3>8. Tools for defining the semantics of programming languages</h3><ul>
+<li><strong>NOTE:</strong> in the lecture only one of the tools below will be
+discussed. </li>
+<li>Links: <ul>
+<li><a href="https://coq.inria.fr/">Coq</a></li>
+<li><a href="https://www.cl.cam.ac.uk/research/hvg/Isabelle/">Isabelle</a></li>
+<li><a href="http://maude.cs.illinois.edu/w/index.php?title=The_Maude_System">Maude</a></li>
+<li><a href="https://racket-lang.org/">Racket</a></li>
+<li><a href="http://www.rascal-mpl.org/">Rascal</a></li>
+<li><a href="http://www.metaborg.org/">Spoofax</a></li>
+</ul>
+</li>
+<li>Lab: work on the semester project.</li>
+</ul>
+<h3>9. Structural Operational Semantics: Big-step and Small-step</h3><ul>
+<li>Bibliography: <ul>
+<li><a href="http://fsl.cs.illinois.edu/images/c/cf/CS422-Spring-2015-02b-BigStep.pdf">Big-step SOS</a></li>
+<li><a href="http://fsl.cs.illinois.edu/images/6/65/CS422-Spring-2015-02c-SmallStep.pdf">Small-step SOS</a></li>
+</ul>
+</li>
+<li>Lab: work on the semester project. <strong>Partial evaluation</strong>.</li>
+</ul>
+<h3>10. Axiomatic semantics: Hoare Logic</h3><ul>
+<li>Bibliography: <a href="http://www.cl.cam.ac.uk/~mjcg/Teaching/2011/Hoare/Notes/Notes.pdf">Background reading on Hoare Logic</a>.</li>
+<li>Lab: work on the semester project.</li>
+</ul>
+<h3>11. Paradigms: Object-Oriented</h3><ul>
+<li>Bibliography: Chapter 10 from the <a href="http://websrv.dthu.edu.vn/attachments/newsevents/content2415/Programming_Languages_-_Principles_and_Paradigms_thereds1106.pdf">BOOK</a>.</li>
+<li>Lab: work on the semester project. <strong>Partial evaluation</strong>.</li>
+</ul>
+<h3>12. Paradigms: functional programming</h3><ul>
+<li>Bibliography: Chapter 11 from the <a href="http://websrv.dthu.edu.vn/attachments/newsevents/content2415/Programming_Languages_-_Principles_and_Paradigms_thereds1106.pdf">BOOK</a>.</li>
+<li>Lab: work on the semester project.</li>
+</ul>
+<h3>13. Paradigms: Logic programming</h3><ul>
+<li>Bibliography: Chapter 12 from the <a href="http://websrv.dthu.edu.vn/attachments/newsevents/content2415/Programming_Languages_-_Principles_and_Paradigms_thereds1106.pdf">BOOK</a>.</li>
+<li>Lab: work on the semester project. <strong>Partial evaluation</strong>.</li>
+</ul>
+<p align="right"><a href="plp.html#top">[Go to top]</a></p>
+
+
+<hr>
+<p><a id="motivation"> </a></p>
+<h2>Motivation &amp; Description</h2><h4>1. How often do you need to learn/design a new programming language?</h4><ul>
+<li>Nowadays, pretty often. There is a plethora of new languages, other than the classical ones (e.g., C, Java, C++), that have been invented in order to fulfill special needs. For instance, domain specific markup languages (Markdown, ColdFusion), functional programming languages (Erlang), compiler writing languages used within metacompilers, etc. The question is how easy is to learn or design such languages? </li>
+</ul>
+<p><em>Description</em>. This course attempts to answer exactly to this challenge, by covering the main <strong>concepts</strong> that a language designer needs to know. Moreover, the course is also useful for programmers, since it facilitates switching from one programming language to another.</p>
+<h4>2. Have you ever wondered why sometimes programs behave in a completely unexpected way?</h4><ul>
+<li>For example, consider the following program:<pre><code>:~$ cat file.c
+int main(void) {
+  int x = 0;
+  return (x = 1) + (x = 2);
+}</code></pre>One would expect that the value returned by this program is 3, since <code>x = 1</code> evaluates to 1 and <code>x = 2</code> evaluates to 2. However, the execution of the program does not exhibit the expected result:<pre><code>:~$ gcc file.c
+:~$ ./a.out ; echo $?
+4</code></pre>This is because in C, the evaluation order of the operands of <code>+</code> is not fixed. So, there is some <strong>undefinedness</strong> involved in this C program. Compilers take advantage of this and choose whatever behavior they want for their programs.
+In <code>gcc</code>, the above program is translated into:<pre><code>int x = 0;
+x = 1;
+x = 2;
+return x + x;</code></pre>Now, obviously, the returned value (i.e., 4) makes sense. However, this is not what a programmer would expect. This strange behavior of the <code>gcc</code> compiler is due to the <strong>undefinedness</strong> of this program (note: in the C standard, the <em>semantics</em> of that program is not defined).</li>
+</ul>
+<p><em>Description</em>. In this course, we address the problem of designing new programming languages by defining their semantics formally. This enables a series of analyses that can be done over programs, including detection of undefined behavior.</p>
+<h4>3. How important is semantics for programming languages?</h4><ul>
+<li>Let us consider another tricky program written in C:<pre><code>:~$ cat out-of-lifetime.c
+int *foo(int x) {
+  int z = x;
+  int *y = &amp;z;
+  return y;
+}
+int main() {
+  int *x = foo(0);
+  foo(255);
+  return *x;
+}</code></pre>There is nasty thing happening here: <code>foo</code> returns a pointer to a local variable, which is a pointer in the stack.
+In <code>main</code>, we call <code>foo</code> twice with different arguments: first we call it with 0 (and we keep a pointer in the stack <code>*x</code>), and then we call it with 255.
+What do you think is the output of this?
+Well... let&#39;s see what <code>gcc</code> says:<pre><code>:~$ gcc --version
+gcc (Ubuntu 4.8.4-2ubuntu1~14.04.1) 4.8.4
+Copyright (C) 2013 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+:~$
+:~$ gcc out-of-lifetime.c 
+:~$ ./a.out ; echo $?
+255</code></pre>This seems right, since for the two calls, two corresponding frames were switched in the stack, and <code>*x</code> points to 255.
+Let us go further and use some <code>gcc</code> optimisation options, like <code>-O3</code>:<pre><code>:~$ gcc -O3 out-of-lifetime.c 
+:~$ ./a.out ; echo $?
+0</code></pre>So, we have used the same <em>program</em>, compiled with the <em>same</em> compiler and we got different results!</li>
+</ul>
+<p><em>Description</em>. In this course, we go through the process of defining both the syntax and the semantics of programming languages. We will see how tricky aspects can be captured by the semantics of a programming language and we will try out very recent tools proposed by the research community.</p>
+<p>For more information on this topic you can watch this <a href="https://www.youtube.com/watch?v=3ovulLNCEQc">video</a>.</p>
+<p align="right"><a href="plp.html#top">[Go to top]</a></p>
+
+
+
+<hr>
+<p><a id="linksbib"> </a></p>
+<h2>Useful links and Bibliography</h2><p>[1] Maurizio Gabbrielli and Simone Martini Programming Languages: Principles and Paradigms. Springer-Verlag London Limited 2010. Can be accessed <a href="http://websrv.dthu.edu.vn/attachments/newsevents/content2415/Programming_Languages_-_Principles_and_Paradigms_thereds1106.pdf">online</a>.</p>
+<p>[2] K Framework (Official website: <a href="http://kframework.org">http://kframework.org</a>)</p>
+<p>[3] G. Rosu. CS422 - Programming Language Design (Fall 2010). University of Illinois at urbana-Champaign (UIUC), USA.</p>
+<ul>
+<li>Big-step structural operational semantics <a href="http://fsl.cs.illinois.edu/images/5/5b/CS422-Fall-2010-PL-book-bigstep.pdf">PL-book-bigstep.pdf</a></li>
+<li>Small-step structural operational semantics <a href="http://fsl.cs.illinois.edu/images/6/64/CS422-Fall-2010-PL-book-smallstep.pdf">PL-book-smallstep.pdf</a></li>
+<li>Reduction semantics with evaluation contexts <a href="http://fsl.cs.illinois.edu/images/c/c1/CS422-Fall-2010-PL-book-rsec.pdf">PL-book-rsec.pdf</a></li>
+</ul>
+<p align="right"><a href="plp.html#top">[Go to top]</a></p></div><hr><div id="footer"><script>function myFunction() {
+    var modifieddate=document.lastModified;
+    document.write("Last updated: " + modifieddate + " - ");
+    document.write("Copyright &copy; Andrei Arusoaie");
+}
+myFunction();</script></div></body></html>

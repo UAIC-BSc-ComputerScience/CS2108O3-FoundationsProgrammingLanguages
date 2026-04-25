@@ -1,0 +1,42 @@
+
+Exercises:
+ 
+1. Describe the syntax of arithmetic expressions with identifiers in K. 
+Then, try to parse (without ambiguities) the following expressions: 
+a)  1 
+b) 1 + 2 
+c)  x + 2 + 6 
+d)  x / 2 * 4 
+e)  x * 5 + 5 / 1 
+f) (x + 2 ) / 4 
+ 
+Hint: use the builtin sorts: Id and Int 
+ 
+2. Extend the syntax of arithmetic expressions with the syntax of boolean expression. 
+Try to parse the following boolean expressions: 
+ 
+a) true 
+b) false 
+c) 2 <= 5 
+d) x < 5 
+e) 2 >= y 
+f) x > y 
+g) 2 == z 
+h) (5 >= x) and (x <= 9) 
+i) (5 >= x) or false 
+ 
+Hint: use the builtin sort Bool 
+
+3. Append to your existing syntax several statements that include assignments, decisional statements, sequences of statements, blocks, and loops.
+ Parse the following language constructs: 
+ 
+a) x = 3 
+b) if (x <= 5) then y = 2 else y = 7 
+c) if (x <= 5) then y = 2 
+d) while (n >= 0) do x = 3 
+f) x = 4 ; y = 2 
+g) { x = 4; y = 3  } 
+h) s = 0; while (n > 0) do  { s = s + n; n = n + (-1)  } 
+ 
+Parse other interesting programs. 
+

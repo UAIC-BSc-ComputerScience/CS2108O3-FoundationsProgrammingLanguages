@@ -1,0 +1,177 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+  <!-- link rel="stylesheet" href="https://profs.info.uaic.ro/~arusoaie.andrei/style.css" /-->
+
+  <link rel="stylesheet" href="https://unpkg.com/sakura.css/css/sakura.css" media="screen" />
+  <link rel="stylesheet" href="https://unpkg.com/sakura.css/css/sakura-dark.css"
+    media="screen and (prefers-color-scheme: dark)" />
+
+
+  <title>~arusoaie.andrei/ Andrei Arusoaie</title>
+  <link rel="author" href="../../../index.html" />
+  <link rel="me" href="../../../index.html" />
+  <meta name="subject" content="Personal Web site of Andrei Arusoaie" />
+  <meta name="url" content="https://profs.info.uaic.ro/~arusoaie.andrei/" />
+  <meta name="description" content="Personal Web site of Andrei Arusoaie" />
+  <meta name="author" content="Andrei Arusoaie - https://profs.info.uaic.ro/~arusoaie.andrei/" />
+  <meta property="og:title" content="Personal Web site of Andrei Arusoaie">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://profs.info.uaic.ro/~arusoaie.andrei/">
+  <meta property="og:description" content="Research and Teaching Material">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    table {
+      border-collapse: collapse;
+      border: 2px solid #ddd;
+      width: 100%;
+    }
+
+    th {
+      background-color:#d8d6d65b;
+      border: 2px solid #d8d6d65b;
+      text-align: center;
+    }
+
+    td {
+      text-align: center;
+      padding: 8px;
+      border: 1px solid #ddd;
+    }
+
+  </style>
+
+</head>
+
+<body>
+  <blockquote>
+    <p>[<a href="../../../index.html">Home</a>]
+      [<a href="../../../teaching.html">Teaching</a>]
+      [<a href="../../../research.html">Research</a>]
+      [<a href="../../../index.html#contact">Contact</a>]</p>
+  </blockquote>
+  <hr />
+
+  <h1 id="laborator-10">Laborator 10</h1>
+  <ul>
+  <li>Back to <a href="../plp.html">PLP - Fall 2022</a></li>
+  <li><strong>OOP</strong></li>
+  </ul>
+  <hr />
+  <h3 id="exerciții-de-antrenament">Exerciții de antrenament:</h3>
+  <ul>
+  <li>Alegeți un limbaj de programare OOP pe care nu îl cunoașteți și
+  instalați un compilator pentru acel limbaj, eventual și un IDE
+  convenabil în care să lucrați. Scrieți un program simplu, de tip
+  <code>Hello world!</code> și testați instalarea acestuia (rulare cu
+  succes). Deși exemplele de cod de mai jos sunt în Java, nu este
+  obligatoriu să faceți și voi implementarea în Java. Exemplele de mai
+  jos sunt pur ilustrative.</li>
+  </ul>
+  <h2 id="exerciții-propuse">Exerciții propuse:</h2>
+  <h3 id="context">Context</h3>
+  <blockquote>
+  <p>Într-o facultate notele studenților sunt gestionate de către
+  secretariat astfel: profesorii pun note studenților, secretariatul
+  stochează notele și <em>notifică</em> atât studenții (care primesc
+  notele) cât și profesorii (care au trimis notele spre înregistrare de
+  către secretariat în catalog).</p>
+  </blockquote>
+  <h4 id="detalii">Detalii:</h4>
+  <ul>
+  <li>Doar profesorii înregistrați pot trimite note. Secretariatul va
+  cunoaște lista profesorilor înregistrați de la început.</li>
+  <li>Notele trimise de profesori sunt înregistrate în catalog (care
+  poate fi un map de la id-ul studentului la nota acestuia).</li>
+  <li>O notă este dată de o pereche <em>nume disciplină</em> și
+  <em>valoare</em> (număr natural între 0 și 10).</li>
+  <li>Secretariatul deține o listă a persoanelor care pot fi notificate.
+  Doar acele persoane vor fi notificate.</li>
+  <li>O notificare pentru o persoană poate fi stocată ca un atribut text
+  care păstrează mereu ultima notificare primită.</li>
+  </ul>
+  <h3 id="cerințe">Cerințe:</h3>
+  <ol type="1">
+  <li>(1 punct) Identificați (la nivel de implementare) clasele de care
+  aveți nevoie, împreună cu atributele și metodele fiecăreia.</li>
+  <li>(1 punct) Explicați în cuvinte cum aveți de gând să utilizați
+  clasele de mai sus pentru a implementa mecanismul de notificare.</li>
+  <li>(4 puncte) Vom considera că avem următorii participanți:</li>
+  </ol>
+  <pre><code>Professor professor1 = new Professor(&quot;Professor1&quot;);
+Professor professor2 = new Professor(&quot;Professor2&quot;);
+Student student1 = new Student(&quot;Student1&quot;);
+Student student2 = new Student(&quot;Student2&quot;);
+Student student3 = new Student(&quot;Student3&quot;);</code></pre>
+  <p>Ambii profesori au voie sa puna note:</p>
+  <pre><code>List&lt;Professor&gt; professors = new ArrayList&lt;&gt;();
+professors.add(professor1);
+professors.add(professor2);
+Secretariat secretariat = new Secretariat(professors);</code></pre>
+  <p>Dintre toți participanții, doar câțiva vor primi notificări, și
+  anume <code>profesor1</code>, <code>student1</code> și
+  <code>student2</code>:</p>
+  <pre><code>secretariat.addNotifiable(professor1);
+secretariat.addNotifiable(student1);
+secretariat.addNotifiable(student2);</code></pre>
+  <p>Testați implementarea voastră pe următoarele scenarii:</p>
+  <ul>
+  <li><code>profesor1</code> notează studentul
+  <code>student1</code>:</li>
+  </ul>
+  <pre><code>professor1.gradeStudent(secretariat, student1, &quot;PLP&quot;, 7);
+System.out.println(professor1.getMostRecentNotification());
+System.out.println(student1.getMostRecentNotification());</code></pre>
+  <p>În acest caz ar trebui ca ambii să primească notificări (fiecare
+  linie din output-ul de mai jos reprezinta notificarea pentru fiecare
+  participant, în ordine):</p>
+  <pre><code>Grade for student Student1 is successfully registered: Grade{discipline=&#39;PLP&#39;, grade=7}
+Professor Professor1 just graded you with Grade{discipline=&#39;PLP&#39;, grade=7}</code></pre>
+  <ul>
+  <li><code>profesor1</code> notează studentul
+  <code>student3</code>:</li>
+  </ul>
+  <pre><code>professor1.gradeStudent(secretariat, student3, &quot;PLP&quot;, 8);
+System.out.println(professor1.getMostRecentNotification());
+System.out.println(student3.getMostRecentNotification());</code></pre>
+  <p>În acest caz ar trebui ca doar primul să primească notificări:</p>
+  <pre><code>Grade for student Student3 is successfully registered: Grade{discipline=&#39;PLP&#39;, grade=8}
+no recent notification</code></pre>
+  <ul>
+  <li><code>profesor2</code> notează studentul
+  <code>student2</code>:</li>
+  </ul>
+  <pre><code>professor2.gradeStudent(secretariat, student2, &quot;PLP&quot;, 9);
+System.out.println(professor2.getMostRecentNotification());
+System.out.println(student2.getMostRecentNotification());</code></pre>
+  <p>În acest caz ar trebui ca doar al doilea să primească
+  notificări:</p>
+  <pre><code>no recent notification
+Professor Professor2 just graded you with Grade{discipline=&#39;PLP&#39;, grade=9}</code></pre>
+  <ul>
+  <li><code>profesor2</code> notează studentul
+  <code>student3</code>:</li>
+  </ul>
+  <pre><code>professor2.gradeStudent(secretariat, student3, &quot;PLP&quot;, 10);
+System.out.println(professor2.getMostRecentNotification());
+System.out.println(student3.getMostRecentNotification());</code></pre>
+  <p>În acest caz ar trebui ca ambii să primească notificări:</p>
+  <pre><code>no recent notification
+no recent notification</code></pre>
+  <hr />
+
+  <script>
+    function myFunction() {
+      var modifieddate = document.lastModified;
+      document.write("Last updated: " + modifieddate + " - ");
+      document.write("Copyright &copy; Andrei Arusoaie");
+    }
+    myFunction();
+  </script>
+
+</body>
+
+</html>

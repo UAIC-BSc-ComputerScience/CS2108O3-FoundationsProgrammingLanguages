@@ -1,0 +1,58 @@
+<!DOCTYPE html><html><head><a id="Top"> </a><link rel="stylesheet" type="text/css" href="../../../../main.css"><link rel="stylesheet" type="text/css" href="../../../../bootstrap.min.css"><meta name="viewport" content="width=device-width, initial-scale=1.0"></head><body><h4><a href="../../../../index.html">home</a> &#8226 <a href="../../../../pages/Teaching.html">teaching</a> &#8226 <a href="../../../../pages/Research.html">research</a> &#8226 <a href="../../../../index.html#contact">contact</a></h4><hr><div id="wrap"><h1>Laborator 10</h1><h3>Exerciții propuse:</h3><ol>
+<li>(1 pct.) Adăugați la semantica small-step a expresiilor booleene din <a href="../week9/imp.v">imp.v</a> operațiile <code>or</code> și <code>equal</code> (egalitate peste <code>AExp</code>). Apoi arătați că <code>or</code>, <code>equal</code> și <code>and</code> se comportă corect pe următoarele exemple:</li>
+</ol>
+<pre><code>Notation &quot;A ==&#39; B&quot; := (bequal A B) (at level 53).
+Example bex_and :
+  forall sigma,
+    band (3 ==&#39; 5) (5 &lt;=&#39; 3) ={ sigma }&gt;* bfalse.
+Admitted.
+
+Example bex_or :
+  forall sigma,
+    bor (3 &lt;=&#39; 5) (5 &lt;=&#39; 3) ={ sigma }&gt;* btrue.
+Admitted.</code></pre><ol start="2">
+<li>(1 pct.) Adăugați la semantica  <a href="../week9/imp.v">imp.v</a> instrucțiunea <code>par</code> care are rolul de a executa două instrucțiuni în paralel:</li>
+</ol>
+<pre><code>Inductive Stmt :=
+...
+| par : Stmt -&gt; Stmt -&gt; Stmt.
+
+Notation &quot;S ||| S&#39;&quot; := (par S S&#39;)
+                         (at level 62, left associativity).
+</code></pre><p>Completați semantica acestei instrucțiuni în definiția lui <code>eval</code>:</p>
+<pre><code>Inductive eval : Stmt -&gt; State -&gt; Stmt -&gt; State -&gt; Prop :=
+...
+| epar1 : forall state state&#39; s1 s2 s1&#39;,
+    s1 -{ state }-&gt;[ s1&#39; ; state&#39; ] -&gt;
+    (s1 ||| s2) -{ state }-&gt; ... 
+| epar2 : ...
+| epar : ...</code></pre><p>Demonstrați că:</p>
+<pre><code>Definition par_loop :=
+  (y ::= 1) ||| (while (y ==&#39; 0) (x ::= x +&#39; 1)).
+
+Example x_remains_zero :
+  forall sigma,
+    sigma y = 0 -&gt;
+    sigma x = 0 -&gt;
+    exists sigma&#39;,
+      par_loop -{ sigma }&gt;*[ skip ; sigma&#39;] /\
+      sigma&#39; x = 0.
+Admitted.</code></pre><ol start="3">
+<li><strong>Bonus</strong> (1 pct.) Demonstrați că:<pre><code>Example x_can_be_1 :
+forall sigma,
+ sigma y = 0 -&gt;
+ sigma x = 0 -&gt;
+ exists sigma&#39;,
+   par_loop -{ sigma }&gt;*[ skip ; sigma&#39;] /\
+   sigma&#39; x = 1.
+Admitted.</code></pre></li>
+</ol>
+<h3>Link-uri utile:</h3><ol>
+<li>Coq Reference Manual: <a href="https://coq.inria.fr/distrib/current/refman/">https://coq.inria.fr/distrib/current/refman/</a></li>
+<li>Software Foundations: <a href="https://softwarefoundations.cis.upenn.edu/">https://softwarefoundations.cis.upenn.edu/</a> </li>
+</ol></div><hr><div id="footer"><script>function myFunction() {
+    var modifieddate=document.lastModified;
+    document.write("Last updated: " + modifieddate + " - ");
+    document.write("Copyright &copy; Andrei Arusoaie");
+}
+myFunction();</script></div></body></html>

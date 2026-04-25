@@ -1,0 +1,59 @@
+<!DOCTYPE html><html><head><a id="Top"> </a><link rel="stylesheet" type="text/css" href="../../../../main.css"><link rel="stylesheet" type="text/css" href="../../../../bootstrap.min.css"><meta name="viewport" content="width=device-width, initial-scale=1.0"></head><body><h4><a href="../../../../index.html">home</a> &#8226 <a href="../../../../pages/Teaching.html">teaching</a> &#8226 <a href="../../../../pages/Research.html">research</a> &#8226 <a href="../../../../index.html#contact">contact</a></h4><hr><div id="wrap"><h1>Laborator 12</h1><ul>
+<li>Back to <a href="../plp.html">PLP - Fall 2021</a></li>
+<li>Tematica: OOP</li>
+</ul>
+<hr>
+<h3>Exerciții de antrenament:</h3><ul>
+<li>Alegeți un limbaj de programare OOP pe care nu îl cunoașteți și instalați un compilator pentru acel limbaj, eventual și un IDE convenabil în care să lucrați. Scrieți un program simpl, de tip <code>Hello world!</code> și testați instalarea acestuia.
+Deși exemplele de cod de mai jos sunt în Java, nu este obligatoriu să faceți și voi implementarea în Java. Exemplele de mai jos sunt pur ilustrative.</li>
+</ul>
+<h2>Exerciții propuse:</h2><h3>Context</h3><blockquote>
+<p>Într-o facultate notele studenților sunt gestionate de către secretariat astfel: profesorii pun note studenților, secretariatul stochează notele și <em>notifică</em> atât studenții (care primesc notele) cât și profesorii (care au trimis notele spre înregistrare de către secretariat în catalog).</p>
+</blockquote>
+<blockquote>
+<p><strong>Detalii</strong>:</p>
+<ul>
+<li>Doar profesorii înregistrați pot trimite note. Secretariatul va cunoaște lista profesorilor înregistrați de la început.</li>
+<li>Notele trimise de profesori sunt înregistrate în catalog (care poate fi un map de la id-ul studentului la nota acestuia).</li>
+<li>O notă este dată de o pereche <em>nume disciplină</em> și <em>valoare</em> (număr natural între 0 și 10).</li>
+<li>Secretariatul deține o listă a persoanelor care pot fi notificate. Doar acele persoane vor fi notificate.</li>
+<li>O notificare pentru o persoană poate fi stocată ca un atribut text care păstrează mereu ultima notificare primită.</li>
+</ul>
+</blockquote>
+<h3>Cerințe:</h3><ol>
+<li>(0.5 puncte) Identificați (la nivel de implementare) clasele de care aveți nevoie, împreună cu atributele și metodele fiecăreia. </li>
+<li>(0.5 puncte) Explicați în cuvinte cum aveți de gând să utilizați clasele de mai sus pentru a implementa mecanismul de notificare.</li>
+<li>(4x0.25 puncte) Vom considera că avem următorii participanți:<pre><code>Professor professor1 = new Professor(&quot;Professor1&quot;);
+Professor professor2 = new Professor(&quot;Professor2&quot;);
+Student student1 = new Student(&quot;Student1&quot;);
+Student student2 = new Student(&quot;Student2&quot;);
+Student student3 = new Student(&quot;Student3&quot;);</code></pre>Ambii profesori au voie sa puna note:<pre><code>List&lt;Professor&gt; professors = new ArrayList&lt;&gt;();
+professors.add(professor1);
+professors.add(professor2);
+Secretariat secretariat = new Secretariat(professors);</code></pre>Dintre toți participanții, doar câțiva vor primi notificări, și anume <code>profesor1</code>, <code>student1</code> și <code>student2</code>:<pre><code>secretariat.addNotifiable(professor1);
+secretariat.addNotifiable(student1);
+secretariat.addNotifiable(student2);</code></pre>Testați implementarea voastră pe următoarele scenarii:<ul>
+<li><code>profesor1</code> notează studentul <code>student1</code>:<pre><code>professor1.gradeStudent(secretariat, student1, &quot;PLP&quot;, 7);
+System.out.println(professor1.getMostRecentNotification());
+System.out.println(student1.getMostRecentNotification());</code></pre>În acest caz ar trebui ca ambii să primească notificări (fiecare linie din output-ul de mai jos reprezinta notificarea pentru fiecare participant, în ordine):<pre><code>Grade for student Student1 is successfully registered: Grade{discipline=&#39;PLP&#39;, grade=7}
+Professor Professor1 just graded you with Grade{discipline=&#39;PLP&#39;, grade=7}</code></pre></li>
+<li><code>profesor1</code> notează studentul <code>student3</code>:<pre><code>professor1.gradeStudent(secretariat, student3, &quot;PLP&quot;, 8);
+System.out.println(professor1.getMostRecentNotification());
+System.out.println(student3.getMostRecentNotification());</code></pre>În acest caz ar trebui ca doar primul să primească notificări:<pre><code>Grade for student Student3 is successfully registered: Grade{discipline=&#39;PLP&#39;, grade=8}
+no recent notification</code></pre></li>
+<li><code>profesor2</code> notează studentul <code>student2</code>:<pre><code>professor2.gradeStudent(secretariat, student2, &quot;PLP&quot;, 9);
+System.out.println(professor2.getMostRecentNotification());
+System.out.println(student2.getMostRecentNotification());</code></pre>În acest caz ar trebui ca doar al doilea să primească notificări:<pre><code>no recent notification
+Professor Professor2 just graded you with Grade{discipline=&#39;PLP&#39;, grade=9}</code></pre></li>
+<li><code>profesor2</code> notează studentul <code>student3</code>:<pre><code>professor2.gradeStudent(secretariat, student3, &quot;PLP&quot;, 10);
+System.out.println(professor2.getMostRecentNotification());
+System.out.println(student3.getMostRecentNotification());</code></pre>În acest caz ar trebui ca ambii să primească notificări:<pre><code>no recent notification
+no recent notification</code></pre></li>
+</ul>
+</li>
+</ol></div><hr><div id="footer"><script>function myFunction() {
+    var modifieddate=document.lastModified;
+    document.write("Last updated: " + modifieddate + " - ");
+    document.write("Copyright &copy; Andrei Arusoaie");
+}
+myFunction();</script></div></body></html>
